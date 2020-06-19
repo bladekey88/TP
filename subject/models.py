@@ -9,11 +9,31 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from streams import blocks
 from lesson.models import Beta
 
+class SubjectPage(Page):
+    '''Page with all subjects on'''
+    
+    templates = 'subject/subject_page.html'
+    parent_page_types = ['home.HomePage']
+    max_count = 1
+    
+    subject =  StreamField(
+        [
+            ("subject", blocks.SubjectBlock()),            
+        ],
+        null=True,
+        blank=False
+     )
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('subject'),
+    ]
+	
+
 class SubjectLandingPage(Page):
     '''Subject Landing Page (Brief Overview of Subjects with more details'''
 
     templates = 'subject/subject_landing_page.html'
-    parent_page_types = ["home.HomePage"]
+    parent_page_types = ["SubjectPage"]
     
     subject = models.CharField(blank=False, null=False, max_length=20, unique=True, help_text='Enter the Subject Name')
     subject_quote = RichTextField(blank=True, null=True, max_length=300,features=['h5', 'bold', 'italic', ])    

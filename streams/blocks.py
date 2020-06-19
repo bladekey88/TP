@@ -1,7 +1,7 @@
 '''StreamField'''
 
 from wagtail.core import blocks
-
+from wagtail.images.blocks import ImageChooserBlock
 
 class TitleAndTextBlock(blocks.StructBlock):
     '''Title and Text'''
@@ -93,3 +93,11 @@ class LessonContentBlock(blocks.StructBlock):
         label = "Lesson Sections"
         help_text = "Each lesson section will cause  a link to be added to  sidebar for ease of navigation. Each section must have a title along with its content."
 
+
+class SubjectBlock(blocks.StructBlock):
+    subject_name = blocks.CharBlock(required=True,label="Subject Name",max_length=30)
+    subject_image = ImageChooserBlock(required=True, label="Subject Image")
+    subject_page = blocks.PageChooserBlock(required=True, page_type="subject.SubjectLandingPage")
+    
+    class Meta:
+        template = 'streams/subject_block.html'

@@ -1,0 +1,12 @@
+{% load wagtailimages_tags  %}
+{% image self.subject_image fill-300x300 as card_img %}
+
+<div class="col-lg-4 col-md-4 d-flex align-items-stretch pb-3 border-dark">
+    <div class="img-container">
+        <img src="{{card_img.url}}">
+        <div class="overlay">
+            <span>{{self.subject_name}}</span>
+            <a href="{{self.subject_page.url}}" class="stretched-link"></a>
+        </div>
+    </div>
+</div>   
