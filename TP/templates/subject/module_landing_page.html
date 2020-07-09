@@ -1,4 +1,4 @@
-{% extends 'core/master.html' %}
+{% extends 'core/base.html' %}
 {% load wagtailimages_tags static wagtailcore_tags %}
 
 {% block extra_css %}
@@ -36,21 +36,39 @@
             <h5 class="mt-0 text-center font-weight-bold ">{{lesson}}</h5>
         </div>
         <div class="card-body border-dark">
-        <div class="row no-gutters bg-light position-relative border mb-3">
-            <div class="col-md-4 mb-md-0 p-md-4">
-                <img src="{% static 'img/bg.png' %}" class="w-100 pt-xl-3 mb-md-10" alt="...">
-            </div>
-            <div class="col-md-8 position-static p-4 pl-md-0">
-                <p>{{lesson.lesson_summary|richtext}}</p>
-                <button class="btn btn-primary  btn-block"><a href="{{lesson.url}}"
-                        class="text-white stretched-link rounded">View Lesson</a></button>
+            <div class="row no-gutters bg-light position-relative border mb-3">
+                <div class="col-md-4 mb-md-0 p-md-4">
+                    <img src="{% static 'img/bg.png' %}" class="w-100 pt-xl-3 mb-md-10" alt="...">
+                </div>
+                <div class="col-md-8 position-static p-4 pl-md-0">
+                    <p>{{lesson.lesson_summary|richtext}}</p>
+                    <button class="btn btn-primary  btn-block"><a href="{{lesson.url}}"
+                            class="text-white stretched-link rounded">View Lesson</a></button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     {% endfor %}
 
 
-
-    {% endblock content %}
 </div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+
+        $('td:nth-child(5),th:nth-child(5)').hide();
+    }) 
+</script>
+
+<script>
+    $('.table-modules > tbody > tr').click(function () {
+
+        var url = $(this).attr('data-href');
+        $(location).attr('href', url)
+
+
+    });
+</script>
+{% block extra_js %}
