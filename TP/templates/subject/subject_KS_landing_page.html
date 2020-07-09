@@ -1,4 +1,4 @@
-{% extends 'core/master.html' %}
+{% extends 'core/base.html' %}
 {% load wagtailimages_tags static %}
 
 {% block extra_css %}
@@ -26,6 +26,22 @@
 {% endblock extra_css %}
 
 {% block content %}
+<section class="module-banner">
+    <div class="container">
+        <div class="col text-center">
+            <h1>KS3 Chemistry</h1>
+            <p class="lead">
+                Some description here Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas, neque
+                libero earum
+                doloremque minus fuga optio. Voluptatibus pariatur sit voluptates dolore culpa amet placeat
+                molestiae illo
+                facilis optio, aspernatur ipsa consequatur asperiores laboriosam nulla similique eaque quod
+                voluptatum
+                cumque temporibus. Totam qui ullam aut excepturi dolorem suscipit natus id tempora!
+            </p>
+        </div>
+    </div>
+</section>
 <section id="services" class="services">
     <div class="container js--content">
 
@@ -46,70 +62,10 @@
             </div>
             {% endfor %}
 
-            <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                <div class="icon-box">
-                    <div class="icon"><i class="bx bx-file"></i></div>
-                    <h4><a href="">Sed ut perspiciatis</a></h4>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                <div class="icon-box">
-                    <div class="icon"><i class="bx bx-tachometer"></i></div>
-                    <h4><a href="">Magni Dolores</a></h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                <div class="icon-box">
-                    <div class="icon"><i class="bx bx-world"></i></div>
-                    <h4><a href="">Nemo Enim</a></h4>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                <div class="icon-box">
-                    <div class="icon"><i class="bx bx-slideshow"></i></div>
-                    <h4><a href="">Dele cardo</a></h4>
-                    <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                <div class="icon-box">
-                    <div class="icon"><i class="bx bx-arch"></i></div>
-                    <h4><a href="">Divera don</a></h4>
-                    <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                </div>
-            </div> -->
+            
 
         </div>
 
     </div>
-</section><!-- End Services Section -->
-<!-- <div class="container js--content">
-        <div class="row">
-            <div class="col-12 py-4">
-                <div class="row">
-                <div class="col-lg-6">
-                <h1> {{self.title}} </h1>
-                    <p>{{self.description}}</p>
-                    <a href="{{self.internal_page}}">Example Lesson</a>
-                </div>
-                <div class="col-lg-6 clearfix">
-                    <picture>                        
-                        {% image self.image fill-350x420 as image %}
-                    <img src="{{image.url}}" alt="{{image.alt}}" height="auto;" style="width:100%">
-                    </picture>
-                </div>
-                
-            </div>
-            </div>
-        </div>
-
-           
-        </div>
+</section>
     {% endblock content %}
