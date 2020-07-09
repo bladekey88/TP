@@ -102,7 +102,26 @@ class SubjectBlock(blocks.StructBlock):
     class Meta:
         template = 'streams/subject_block.html'
         
+       
+class ModuleLessonDescriptionBlock(blocks.StructBlock):
+    lesson_title = blocks.CharBlock(required=True, label="Lesson Name",max_length=50)
+    lesson_description = blocks.CharBlock(required=True, label="Lesson Description",max_length=200)
+    lesson_page = blocks.PageChooserBlock(required=True, page_type="lesson.Beta")
+    
+    class Meta:
+        template = 'streams/module_lesson_description_block.html'
         
 class ModuleLessonSummaryBlock(blocks.StructBlock):
-    lesson_chapter = blocks.CharBlock(required=True, label = "Chapter Name", max_length = 100, default="Chapter xx")
-    
+    lesson_chapter = blocks.CharBlock(required=True, label = "Chapter Name", max_length = 100, default="e.g. Chapter xx: Introduction")
+    # lesson_page = blocks.PageChooserBlock(required=True, page_type="lesson.Beta")
+    lesson_info = blocks.StreamBlock(
+        [
+            ('lesson_page', ModuleLessonDescriptionBlock ())
+        ],
+        blank=False,
+        null=False,
+        label = "Lesson Page", 
+        page_type="lesson.Beta"
+    )
+    class Meta:
+        template = 'streams/module_lesson_summary_block.html'
