@@ -1,57 +1,154 @@
 {% extends 'core/base.html' %}
 {% load wagtailimages_tags static wagtailcore_tags %}
 
-{% block extra_css %}
-<style>
-    .TP {
-        background-color: rgba(7, 12, 59, 0.90);
-        color: white;
-    }
 
-    .card-horizontal {
-        display: flex;
-        flex: 1 1 auto;
-        height: 16vw;
-    }
-
-
-    .card-img-top {
-        width: 100%;
-        height: 15vw;
-        object-fit: cover;
-        align-items: center;
-    }
-</style>
-{% endblock extra_css %}
-
-{%block content %}
-<div class="container js--content">
-    <div class="card border-dark my-4">
-        <div class="card-body text-left">{{self.description|richtext}}</div>
-    </div>
-
-    {% for lesson in modules %}
-    <div class="card shadow border">
-        <div class="card-header border-dark TP">
-            <h5 class="mt-0 text-center font-weight-bold ">{{lesson}}</h5>
-        </div>
-        <div class="card-body border-dark">
-            <div class="row no-gutters bg-light position-relative border mb-3">
-                <div class="col-md-4 mb-md-0 p-md-4">
-                    <img src="{% static 'img/bg.png' %}" class="w-100 pt-xl-3 mb-md-10" alt="...">
-                </div>
-                <div class="col-md-8 position-static p-4 pl-md-0">
-                    <p>{{lesson.lesson_summary|richtext}}</p>
-                    <button class="btn btn-primary  btn-block"><a href="{{lesson.url}}"
-                            class="text-white stretched-link rounded">View Lesson</a></button>
-                </div>
+{% block content %}
+<section class="lesson-banner">
+<div class="container">
+    <div class="col text-center">
+        <h1>{{self.title}}</h1>
+        <div class="row">
+            <div class="col">
+                <p class="lead">Module Summary</p>
+                <p>{{self.description|richtext}}</p>
+            </div>
+            <div class="col">
+                <p class="lead">Module Objectives</p>
+                <p>{{self.objectives|richtext}}</p>
             </div>
         </div>
     </div>
-    {% endfor %}
-
-
 </div>
+</section>
+<hr>
+<section class="lesson">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="font-weight-bolder"><i class="fas fa-2x fa-atom"></i>
+                            Chapter 1: Introduction
+                        </h5>
+                    </div>
+                    <div class="card-body border">
+                        <h5>
+                            <span class="dot bg-success"></span>
+                            What are atoms?
+                        </h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5>
+                            <span class="dot bg-warning"></span>
+                            What are elements?
+                        </h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5>
+                            <span class="dot"></span>
+                            What are compounds?
+                        </h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Chapter 1: Introduction</h5>
+                    </div>
+                    <div class="card-body border">
+                        <h5>What are atoms?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5>What are elements?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5><i class="fas fa-atom"></i> What are compounds?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Chapter 1: Introduction</h5>
+                    </div>
+                    <div class="card-body border">
+                        <h5>What are atoms?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5>What are elements?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5><i class="fas fa-atom"></i> What are compounds?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Chapter 1: Introduction</h5>
+                    </div>
+                    <div class="card-body border">
+                        <h5>What are atoms?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5>What are elements?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                    <div class="card-body border">
+                        <h5><i class="fas fa-atom"></i> What are compounds?</h5>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum quidem minima iusto
+                            molestias vero ipsam velit itaque quas nostrum incidunt.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <aside>
+                    <div class="box-style">
+                        <h4>
+                            Sections
+                            <span class="float-right">5</span>
+                        </h4>
+                        <h4>
+                            Lessons
+                            <span class="float-right">25</span>
+                        </h4>
+                        <h4>
+                            ~Time Per Lesson
+                            <span class="float-right">30 mins</span>
+                        </h4>
+                    </div>
+                    <div class="box-style">
+                        <h4>
+                            Key
+                        </h4>
+                        <p><span class="dot"></span> Not Started</p>
+                        <p><span class="dot bg-warning"></span> In Progress</p>
+                        <p><span class="dot bg-success"></span> Complete</p>
+
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
 
 {% block extra_js %}
@@ -71,4 +168,4 @@
     });
 </script>
 
-{% block extra_js %}
+{% endblock extra_js %}

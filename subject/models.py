@@ -71,15 +71,13 @@ class SubjectKSLandingPage(Page):
         
         templates  = 'subject/subject_KS_landing_page.html'
         parent_page_types = ["subject.SubjectLandingPage"]
-        
-        
+               
         description = models.TextField(
             blank=False, 
             null=True,
             max_length= 200,
             help_text = "Please insert a short description as to what this Key Stage covers"
-        )
-        
+        )    
         
         image = models.ForeignKey(
             'wagtailimages.Image',
@@ -95,8 +93,8 @@ class SubjectKSLandingPage(Page):
             FieldPanel('title', heading="Key Stage"),
             RichTextFieldPanel('description'),
             ImageChooserPanel('image'),            
-    ]
-
+         ]
+        
         def get_context(self,request,*args,**kwargs):
             context = super().get_context(request,*args,**kwargs)
             context["modules"] = self.get_children().live().public()
@@ -111,19 +109,33 @@ class ModuleLandingPage(Page):
         templates  = 'subject/module_landing_page.html'
         parent_page_types = ["subject.SubjectKSLandingPage"]
 
-
         description = RichTextField(
             blank=False, 
             null=True,
             max_length= 400,
             help_text = "Please insert a short description explaining what this module covers"
         )
-
-
+        
+        objectives = RichTextField(
+            blank=False,
+            null=True,
+            max_length=400,
+            help_text = "Please add the learning objectives for this module"
+        )
+        
+        lesson_summary = StreamField(
+            [
+                ('module_lesson_summary', blocks.ModuleLessonSummaryBlock())
+            ],
+            null=True,
+            blank=True,
+        )
+        
         content_panels = Page.content_panels + [
              RichTextFieldPanel('description'),
-        ]
-            
+             RichTextFieldPanel('objectives'),  
+             StreamFieldPanel('lesson_summary'),
+        ] 
         
         def get_context(self,request,*args,**kwargs):
             context = super().get_context(request,*args,**kwargs)

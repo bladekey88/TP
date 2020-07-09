@@ -101,3 +101,8 @@ class SubjectBlock(blocks.StructBlock):
     
     class Meta:
         template = 'streams/subject_block.html'
+        
+        
+class ModuleLessonSummaryBlock(blocks.StructBlock):
+    lesson_chapter = blocks.CharBlock(required=True, label = "Chapter Name", max_length = 100, default="Chapter xx")
+    
