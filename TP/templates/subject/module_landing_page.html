@@ -55,6 +55,7 @@
 {% endblock content %}
 
 {% block extra_js %}
+
 <script>
     $(document).ready(function () {
 
@@ -67,8 +68,7 @@
 
         var url = $(this).attr('data-href');
         $(location).attr('href', url)
-
-
     });
 </script>
+
 {% block extra_js %}
