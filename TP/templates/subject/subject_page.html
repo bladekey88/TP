@@ -1,52 +1,40 @@
-{% extends 'core/master.html' %}
+{% extends 'core/base.html' %}
 {% load wagtailimages_tags static wagtailcore_tags %}
 
 {% block extra_css %}
-<style>
-    .img-container {
-        position: relative;
-        display: inline-block;
-    }
 
-    .img-container .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgb(11, 6, 87);
-        opacity: 0;
-        transition: opacity 500ms ease-in-out;
-    }
-
-    .img-container:hover .overlay {
-        opacity: 1;
-    }
-
-    .overlay span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        font-size: 2rem;
-        transform: translate(-50%, -50%);
-        color: #fff;
-    }
-</style>
 {% endblock extra_css %}
 
-{% block navbar-secondary %}{% endblock %}
+
 
 {% block content %}
 
-<div class="container js--content">
-    <div class="col-12 py-4">
-        <h2 class="text-dark text-center">Subjects</h2>
+<section class="subject-banner">
+    <div class="container">
+        <div class="col text-center">
+            <h1>Subjects</h1>
+            <p class="lead">
+                Some description here Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas, neque
+                libero earum
+                doloremque minus fuga optio. Voluptatibus pariatur sit voluptates dolore culpa amet placeat
+                molestiae illo
+                facilis optio, aspernatur ipsa consequatur asperiores laboriosam nulla similique eaque quod
+                voluptatum
+                cumque temporibus. Totam qui ullam aut excepturi dolorem suscipit natus id tempora!
+            </p>
+        </div>
     </div>
-    <div class="row ">
-        {% for block in self.subject %}
-            {% include_block block %}
-        {% endfor %}
+</section>
+<hr>
+
+<section id="subjects" class="subjects">
+    <div class="container">
+        <div class="row">
+            {%for block in self.subject %}
+                    {% include_block block %}
+                {%endfor%}
+        </div>
     </div>
-</div>
+</section>
 
 {% endblock content %}

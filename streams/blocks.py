@@ -70,7 +70,7 @@ class InfoBlock(blocks.RichTextBlock):
     def __init__(self, required=False, help_text=None, editor='default', features=None, validators=(), **kwargs):
         super().__init__(**kwargs)
         self.features = ['bold', 'italic', 'h5', 'supercript','superscript',]
-        self.help_text= 'This field is used to draw attention to something or highlight something of intrest'
+        self.help_text = 'This field is used to draw attention to something or highlight something of intrest'
     
     
     
@@ -96,7 +96,7 @@ class LessonContentBlock(blocks.StructBlock):
 
 class SubjectBlock(blocks.StructBlock):
     subject_name = blocks.CharBlock(required=True,label="Subject Name",max_length=30)
-    subject_image = ImageChooserBlock(required=True, label="Subject Image")
+    subject_description = blocks.CharBlock(required=True, label="Subject description", max_length=70)
     subject_page = blocks.PageChooserBlock(required=True, page_type="subject.SubjectLandingPage")
     
     class Meta:
