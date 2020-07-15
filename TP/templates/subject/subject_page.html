@@ -41,8 +41,8 @@
         margin-bottom: 3px;
     }
 
-    ul.subject-categories li.active a  {
-        background:  #0cbdaa;
+    ul.subject-categories li.active a {
+        background: #0cbdaa;
         color: #fff;
     }
 </style>
@@ -78,13 +78,13 @@
                 <div class="category-box shadow border-1">
                     <h4>Subject Categories</h4>
                     <ul class="subject-categories">
-                        <li><a href="#">Arts</a></li>
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">Humanities</a></li>
-                        <li><a href="#">Languages</a></li>
-                        <li><a href="#">Society and Civics</a></li>
-                        <li class="active"><a href="#">Sciences</a></li>
-                        <li><a href="#">Technology</a></li>
+                        <li><a href="#art">Arts</a></li>
+                        <li><a href="#english">English</a></li>
+                        <li><a href="#humanities">Humanities</a></li>
+                        <li><a href="#languages">Languages</a></li>
+                        <li><a href="#society">Society and Civics</a></li>
+                        <li class="active"><a class="science" href="#science">Science</a></li>
+                        <li><a href="#technology">Technology</a></li>
 
                     </ul>
                 </div>
@@ -102,3 +102,30 @@
 </section>
 
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+        $(".subject-categories").on('click', 'li', function () {
+            $('li').removeClass('active');
+            $(this).addClass('active');
+            subject = $(this).text();
+            hiddenClass = "d-none";
+            $(".col-lg-9").each(function(){
+                console.log($(this).html());
+                $(".fadeIn").each(function() {
+                     if ($(this).attr('data-href') !=  subject) {
+                         $(this).addClass(hiddenClass);
+                     }
+                     else
+                     {
+                        $(this).removeClass(hiddenClass);
+                     }
+                })
+            })
+                
+        });
+    });
+
+</script>
+{% endblock extra_js %}

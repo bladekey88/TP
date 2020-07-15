@@ -1,10 +1,13 @@
 from django.db import models
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, RichTextFieldPanel, InlinePanel, PageChooserPanel
+from django import forms
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, RichTextFieldPanel, InlinePanel, PageChooserPanel, MultiFieldPanel
 from wagtail.core.fields import StreamField, RichTextField
 from modelcluster.fields import ParentalKey
 from wagtail.core.models import Page, Orderable
-
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.models import register_snippet
+
+from modelcluster.fields import ParentalManyToManyField
 
 from streams import blocks
 from lesson.models import Beta
@@ -23,12 +26,45 @@ class SubjectPage(Page):
         null=True,
         blank=False
      )
-
+    
+    categories = ParentalManyToManyField("subject.SubjectCategory", blank=False)
+    
     content_panels = Page.content_panels + [
         StreamFieldPanel('subject'),
+        MultiFieldPanel(
+            [
+                FieldPanel("categories", widget=forms.CheckboxSelectMultiple)
+            ],
+            heading = "Categories"
+        )
     ]
 	
-
+class SubjectCategory(models.Model):
+    '''category for snippers'''
+    
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(
+        verbose_name = "slug",        
+        allow_unicode = False,
+        max_length = 255,
+        help_text = "A slug to identify subejcts by category", 
+        )
+    
+    class Meta:
+        verbose_name = "Subject Category"
+        verbose_name_plural = "Subject Categories"
+        ordering = ["name"]
+    
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("slug"),
+    ]
+           
+    def __str__(self):
+        return self.name
+    
+register_snippet(SubjectCategory)    
+    
 class SubjectLandingPage(Page):
     '''Subject Landing Page (Brief Overview of Subjects with more details'''
 

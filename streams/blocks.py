@@ -2,6 +2,8 @@
 
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
+from modelcluster.fields import ParentalManyToManyField
+from wagtail.snippets.blocks import SnippetChooserBlock
 
 class TitleAndTextBlock(blocks.StructBlock):
     '''Title and Text'''
@@ -98,10 +100,10 @@ class SubjectBlock(blocks.StructBlock):
     subject_name = blocks.CharBlock(required=True,label="Subject Name",max_length=30)
     subject_description = blocks.CharBlock(required=True, label="Subject description", max_length=70)
     subject_page = blocks.PageChooserBlock(required=True, page_type="subject.SubjectLandingPage")
+    subject_categories = SnippetChooserBlock('subject.SubjectCategory',required=False, help_text="Choose a subject category")
     
     class Meta:
-        template = 'streams/subject_block.html'
-        
+        template = 'streams/subject_block.html'    
        
 class ModuleLessonDescriptionBlock(blocks.StructBlock):
     lesson_title = blocks.CharBlock(required=True, label="Lesson Name",max_length=50)
