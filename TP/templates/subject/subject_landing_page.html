@@ -1,64 +1,31 @@
-{% extends "core/master.html" %}
+{% extends "core/base.html" %}
 {% load static wagtailcore_tags %}
 {% load wagtailimages_tags %}
-{% load menu_tags %}
-
-{% block extra_css %}
-<link
-    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-
-  <style>
-    * {
-      font-family: 'Fira Sans', sans-serif !important;
-    }
-
-    img {
-      width: 100%;
-      height: 232px;
-      
-    }
-
-       header {
-      background-color: rgba(20, 53, 80, 0.8) !important;
-    }
-
-    .card{
-      border: none;
-      box-shadow: 0 6px 20px 0 rgba(0,0,0,0.19) !important;
-      transition: all 0.2s;
-    }
-
-    .card:hover{
-      scale: 1.01;
-      opacity: 0.9;
-      box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.404),0 6px 20px 0 rgba(0, 0, 0, 0.377) !important;
-    }
-
-  </style>
-
-
-{% endblock %}
-{% block navbar-secondary %}{% endblock %}
 
 {% block content %}
 
 
 <!-- Header -->
-<header class="py-1 mb-5">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-lg-12">
-                <h1 class="display-4 text-center text-white mt-5 mb-2">{{self.subject}}</h1>
-                <blockquote class="lead mb-5">{{self.subject_quote|richtext}}</p>
+<section class="keystage-banner">
+    <div class="container">
+        <div class="col text-center">
+            <h1 class="shadow">{{self.subject}}</h1>
+            <div class="row">
+                <div class="quote col-8 offset-2 bg-white text-dark shadow rounded">
+                    <blockquote class="h5">
+                        <p>
+                            {{self.subject_quote|richtext}}
+                        </p>
+                    </blockquote>
+                </div>
             </div>
         </div>
     </div>
-</header>
+</section>
+<hr>
 
 <!-- Page Content -->
 <div class="container">
-
     <div class="row">
         <div class="col-md-8 mb-5">
             <h2>Course Content</h2>
@@ -102,9 +69,9 @@
         </div>
         {% endfor %}
     </div>
-        
-        
-       
+
+
+
 </div>
 <!-- /.container -->
 {% endblock content %}

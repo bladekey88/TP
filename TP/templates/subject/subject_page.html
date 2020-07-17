@@ -111,8 +111,7 @@
             $(this).addClass('active');
             subject = $(this).text();
             hiddenClass = "d-none";
-            $(".col-lg-9").each(function(){
-                console.log($(this).html());
+            $(".col-lg-9").each(function(){        
                 $(".fadeIn").each(function() {
                      if ($(this).attr('data-href') !=  subject) {
                          $(this).addClass(hiddenClass);

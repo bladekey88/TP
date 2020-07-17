@@ -95,8 +95,7 @@ class SubjectLandingPage(Page):
         context = super().get_context(request,*args,**kwargs)
         # context["keystages"] = SubjectKSLandingPage.objects.live().public()
         context['keystages'] = SubjectKSLandingPage.objects.live().public().filter(title__icontains=self.subject)
-        context['SubjectLandingPage'] = self
-        context['menuitems'] = self.get_children().filter(live=True, show_in_menus=True)
+        context['SubjectLandingPage'] = self        
         return context
 
 class SubjectKSLandingPage(Page):
