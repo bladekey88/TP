@@ -55,16 +55,17 @@ header {
 
 header .btn {
     border: none;
+    margin-top: 5px;
     margin-right: 5px;
     margin-left: 10px;
     color: #fff;
-    font-size: 1rem;
+    font-size: 0.75rem;
     text-decoration: none;
     display: inline-block;
     border-radius: 3px;
     cursor: pointer;
     outline: 0;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     text-align: center;
     transition: all 0.2s;
@@ -127,6 +128,42 @@ nav {
     opacity: 1;
 }
 
+/***************
+** BREADCRUMBS **
+***************/
+
+.breadcrumbs {
+    background: #e9ecef;
+    border-top: 1px solid #b1adad;
+    border-bottom: 1px solid #b1adad;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb {
+    padding: 0;
+    padding-top: 10px;
+    overflow: hidden;
+    font-size: 1rem;
+}
+
+.breadcrumb li {
+    padding-right: 10px;
+    padding-left: 10px;
+    
+}
+.breadcrumb a {
+    text-decoration: none;
+    color: #3934a5;
+    /* transition: all 0.2s; */
+}
+
+.breadcrumb a:hover {
+    padding-bottom: 1px;
+    text-decoration: none;
+    color: black;
+
+}
 /***********
 ** Carousel **
 ************/
@@ -385,19 +422,20 @@ footer hr {
     height: 1px;
 }
 
-/*  */
-
+/***************/
+/***************/
 /* SUBJECT PAGE */
+/***************/
+/***************/
 
-/*  */
 
 .subject-banner {
-    padding: 125px 0 60px;
+    padding: 75px 0 10px;
     color: #fff;
     position: relative;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('img/subjects.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('/static/img/subjects.jpeg');
     background-position: center;
     background-size: cover;
 }
@@ -418,7 +456,7 @@ footer hr {
 /* SUBJECT section (contains the cards */
 
 .subjects {
-    padding: 3rem;
+    padding: 1rem;
 }
 
 .subject-card {
@@ -606,11 +644,62 @@ footer hr {
     }
 }
 
-/*  */
+.category-box {
+    padding: 15px 25px 5px;
+    box-shadow: inset 0 0 0 1px #e0e5e9;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: 13px;
+    line-height: 20px;
+    background-color: #fff;
+    margin-top: 50px;
+}
 
+.category-box h4 {
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    text-align: center;
+}
+
+ul.subject-categories {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+ul.subject-categories li a {
+    text-decoration: none;
+    padding: 4px 10px;
+    display: block;
+    margin-bottom: 3px;
+}
+
+ul.subject-categories li:last-of-type {
+    margin-bottom: 10px;
+}
+
+ul.subject-categories li.all{
+    border-bottom: 1px solid #eaeff3;
+}
+
+ul.subject-categories li.active a {
+    /* background: #0cbdaa; */
+    background: #2446a3;
+    color: #fff;
+}
+
+
+
+/*****************
+/******************
 /* MODULES PAGE */
-
-/*  */
+/*****************
+/*****************/
 
 .module-banner {
     padding: 80px 0 60px;
@@ -618,7 +707,7 @@ footer hr {
     position: relative;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .4);
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('img/chemistry-banner.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('/static/img/chemistry-banner.jpg');
     background-position: center;
     background-size: cover;
 }
@@ -662,6 +751,23 @@ footer hr {
     font-weight: 700;
 }
 
+.modules .icon-box {
+    text-align: center;
+    background: rgba(204, 204, 204, 0.3);
+    padding: 20px 20px;
+    transition: all ease-in-out 0.3s;
+    border: 1px black solid;
+    box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.274) !important; 
+
+}
+
+.icon-box:hover {
+    background: rgba(102, 204, 204, 0.5);
+    scale: 1.01;
+    box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.05) !important; 
+   
+    
+}
 /*  */
 
 /*  */
@@ -681,7 +787,7 @@ footer hr {
     color: #fff;
     position: relative;
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('img/chemistry-subject-banner.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('/static/img/chemistry-subject-banner.jpeg');
     background-position: center;
     background-size: cover;
 }
@@ -724,7 +830,7 @@ footer hr {
     color: #fff;
     position: relative;
     width: 100%;
-    background: linear-gradient(rgba(2, 12, 27, 0.925), rgba(8, 33, 71, 0.925)), url('img/atoms.jpg');
+    background: linear-gradient(rgba(2, 12, 27, 0.671), rgba(8, 33, 71, 0.925)), url('/static/img/atoms.jpg');
     background-position: center;
     background-size: cover;
 }

@@ -2,10 +2,7 @@
 {% load static wagtailcore_tags %}
 {% load wagtailimages_tags %}
 
-{% block content %}
-
-
-<!-- Header -->
+{% block banner %}
 <section class="keystage-banner">
     <div class="container">
         <div class="col text-center">
@@ -22,8 +19,9 @@
         </div>
     </div>
 </section>
-<hr>
+{% endblock %}
 
+{% block content %}
 <!-- Page Content -->
 <div class="container">
     <div class="row">

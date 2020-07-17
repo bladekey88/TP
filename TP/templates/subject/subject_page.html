@@ -1,58 +1,8 @@
 {% extends 'core/base.html' %}
 {% load wagtailimages_tags static wagtailcore_tags %}
 
-{% block extra_css %}
-<style>
-    .category-box {
-        padding: 15px 25px 5px;
-        box-shadow: inset 0 0 0 1px #e0e5e9;
-        border: 5px solid #fbfbfc;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        margin-bottom: 30px;
-        font-size: 13px;
-        line-height: 20px;
-        background-color: #fff;
-        margin-top: 50px;
-    }
 
-    .category-box h4 {
-        border-bottom: 1px solid #eaeff3;
-        padding-bottom: 10px;
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        font-weight: bolder;
-        text-align: center;
-    }
-
-    ul.subject-categories {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        font-weight: 600;
-        font-size: 1rem;
-    }
-
-    ul.subject-categories li a {
-        text-decoration: none;
-        padding: 4px 10px;
-        display: block;
-        margin-bottom: 3px;
-    }
-
-    ul.subject-categories li.active a {
-        background: #0cbdaa;
-        color: #fff;
-    }
-</style>
-
-{% endblock extra_css %}
-
-
-
-{% block content %}
-
+{% block banner %}
 <section class="subject-banner">
     <div class="container">
         <div class="col text-center">
@@ -69,26 +19,31 @@
         </div>
     </div>
 </section>
-<hr>
+{% endblock banner %}
 
+
+{% block content %}
 <section id="subjects" class="subjects">
     <div class="container">
+
         <div class="row">
+            
             <div class="col-lg-3 col-md-4 col-sm-4">
                 <div class="category-box shadow border-1">
                     <h4>Subject Categories</h4>
                     <ul class="subject-categories">
+                        <li class="active all"><a href="#all">All Categories</a></li>
                         <li><a href="#art">Arts</a></li>
                         <li><a href="#english">English</a></li>
                         <li><a href="#humanities">Humanities</a></li>
-                        <li><a href="#languages">Languages</a></li>
+                        <li><a href="#languages">Language</a></li>
                         <li><a href="#society">Society and Civics</a></li>
-                        <li class="active"><a class="science" href="#science">Science</a></li>
+                        <li><a class="science" href="#science">Science</a></li>
                         <li><a href="#technology">Technology</a></li>
-
                     </ul>
                 </div>
             </div>
+            
             <div class="col-lg-9 col-md-8">
                 <div class="row">
                     {%for block in self.subject %}
@@ -109,20 +64,29 @@
         $(".subject-categories").on('click', 'li', function () {
             $('li').removeClass('active');
             $(this).addClass('active');
-            subject = $(this).text();
-            hiddenClass = "d-none";
-            $(".col-lg-9").each(function(){        
-                $(".fadeIn").each(function() {
-                     if ($(this).attr('data-href') !=  subject) {
-                         $(this).addClass(hiddenClass);
-                     }
-                     else
-                     {
-                        $(this).removeClass(hiddenClass);
-                     }
+
+            let subject = $(this).text();
+            let hiddenClass = "d-none";
+
+            if ($(this).text() == "All Categories") {
+                $(".fadeIn").each(function () {
+                    $(this).removeClass(hiddenClass);
                 })
-            })
-                
+            }
+            else {
+
+                $(".col-lg-9").each(function () {
+                    $(".fadeIn").each(function () {
+                        if ($(this).attr('data-href') != subject) {
+                            $(this).addClass(hiddenClass);
+                        }
+                        else {
+                            $(this).removeClass(hiddenClass);
+                        }
+                    })
+                })
+            }
+
         });
     });
 

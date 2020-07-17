@@ -1,31 +1,8 @@
 {% extends 'core/base.html' %}
 {% load wagtailimages_tags static %}
 
-{% block extra_css %}
-<style>
-    .modules .icon-box {
-        text-align: center;
-        background: rgba(204, 204, 204, 0.3);
-        padding: 20px 20px;
-        transition: all ease-in-out 0.3s;
-        border: 1px black solid;
-        box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.274) !important; 
 
-    }
-
-    .icon-box:hover {
-        background: rgba(102, 204, 204, 0.5);
-        scale: 1.01;
-        box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.05) !important; 
-       
-        
-    }
-</style>
-
-
-{% endblock extra_css %}
-
-{% block content %}
+{% block banner %}
 <section class="module-banner">
     <div class="container">
         <div class="col text-center">
@@ -42,28 +19,29 @@
         </div>
     </div>
 </section>
+{% endblock banner %}
+
+
+{% block content %}
 <section class="modules">
     <div class="container">
-        <div class="row">
-
-
         <div class="row ">
             {% for module in modules %}
             <div class="col-lg-4 col-md-4 d-flex align-items-stretch border-dark">
                 <div class="icon-box shadow">
                     <div class="icon">
-                        <picture><img height="50px" width="50px" src='{% static "img/lesson-icon.png" %}'></picture>
+                        <picture>
+                            <img height="50px" width="50px" src='{% static "img/lesson-icon.png" %}'>
+                        </picture>
                     </div>
-                    <h4><a href="{{module.url}}">{{module}}</a></h4>
+                    <h4>
+                        <a class="stretched-link" href="{{module.url}}">{{module}}</a>
+                    </h4>
                     <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                 </div>
             </div>
             {% endfor %}
-
-            
-
         </div>
-
     </div>
 </section>
-    {% endblock content %}
+{% endblock content %}
