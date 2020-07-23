@@ -117,7 +117,6 @@ nav {
     margin-top: 0px;
     opacity: 0.75;
     transition: all ease 0.6s;
-
 }
 
 .light-header {
@@ -150,8 +149,8 @@ nav {
 .breadcrumb li {
     padding-right: 10px;
     padding-left: 10px;
-    
 }
+
 .breadcrumb a {
     text-decoration: none;
     color: #3934a5;
@@ -162,8 +161,8 @@ nav {
     padding-bottom: 1px;
     text-decoration: none;
     color: black;
-
 }
+
 /***********
 ** Carousel **
 ************/
@@ -423,11 +422,14 @@ footer hr {
 }
 
 /***************/
-/***************/
-/* SUBJECT PAGE */
-/***************/
+
 /***************/
 
+/* SUBJECT PAGE */
+
+/***************/
+
+/***************/
 
 .subject-banner {
     padding: 75px 0 10px;
@@ -595,7 +597,6 @@ footer hr {
         border-bottom-right-radius: 0;
         filter: drop-shadow(0 3px 10px rgba(110, 123, 157, 0.377));
         margin-bottom: 130px;
-
     }
     .box-classic:hover .box-classic-inner {
         height: 120px;
@@ -605,13 +606,11 @@ footer hr {
     }
     .box-classic:not(:hover) .box-classic-inner {
         color: transparent;
-        
     }
     .box-classic-main {
         position: relative;
         height: 160px;
         transition: 0.5s;
-        
     }
     .box-classic-inner {
         position: absolute;
@@ -629,7 +628,6 @@ footer hr {
         transform: translate3d(0, 0, 0);
         border: 1px solid #041d2e;
         border-top: 0;
-        
     }
     html:not(.tablet):not(.mobile) .box-classic-inner::after {
         content: '';
@@ -640,7 +638,6 @@ footer hr {
         height: 40px;
         background: linear-gradient(to top, white 30%, rgba(255, 255, 255, 0.4));
         border-radius: inherit;
-        
     }
 }
 
@@ -683,7 +680,7 @@ ul.subject-categories li:last-of-type {
     margin-bottom: 10px;
 }
 
-ul.subject-categories li.all{
+ul.subject-categories li.all {
     border-bottom: 1px solid #eaeff3;
 }
 
@@ -693,16 +690,15 @@ ul.subject-categories li.active a {
     color: #fff;
 }
 
-
-
 /*****************
 /******************
 /* MODULES PAGE */
+
 /*****************
 /*****************/
 
 .module-banner {
-    padding: 80px 0 60px;
+    padding: 80px 0 1px;
     color: #fff;
     position: relative;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .4);
@@ -755,26 +751,57 @@ ul.subject-categories li.active a {
     text-align: center;
     background: rgba(204, 204, 204, 0.3);
     padding: 20px 20px;
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.1s;
     border: 1px black solid;
-    box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.274) !important; 
-
+    box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.274) !important;
 }
 
-.icon-box:hover {
+.modules .icon-box:hover {
     background: rgba(102, 204, 204, 0.5);
     scale: 1.01;
-    box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.05) !important; 
-   
-    
+    box-shadow: 0 0.5rem 1rem rgba(29, 15, 219, 0.05) !important;
+}
+
+.modules .icon-box a:hover {
+    text-decoration: none;
+}
+
+.keystage-indicator {
+    background-color: #17496b;
+    padding: 5px 0;
+}
+
+.chapter-info {
+    font-size: 1rem;
+    padding: 0;
+    padding-top: 10px;
+    background-color: #17496b;
+    border-top: 1px solid #1abc9c
+}
+
+.chapter-info-heading {
+    font-size: 1.2rem;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    display: block;
+    border-bottom: 1px solid rgb(202, 202, 202);
+}
+
+.chapter-info ol {
+    list-style: none;
+    padding-left: 20px;
+    font-weight: 500;
 }
 
 /*****************/
-/*****************/
-/* SUBJECT PAGE (KS LANDING PAGE */
-/*****************/
+
 /*****************/
 
+/* SUBJECT PAGE (KS LANDING PAGE */
+
+/*****************/
+
+/*****************/
 
 .keystage {
     padding: 3rem;
@@ -813,11 +840,15 @@ ul.subject-categories li.active a {
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.404), 0 6px 20px 0 rgba(0, 0, 0, 0.377) !important;
 }
 
-/*  */
+/********************/
+
+/********************/
 
 /* LESSON PAGE */
 
-/*  */
+/********************/
+
+/********************/
 
 .lesson {
     padding: 3rem;

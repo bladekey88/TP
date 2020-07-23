@@ -111,7 +111,7 @@ class SubjectKSLandingPage(Page):
             blank=False, 
             null=True,
             max_length= 200,
-            help_text = "Please insert a short description as to what this Key Stage covers"
+            help_text = "Please enter a short description as to what this Key Stage covers"
         )    
         
         image = models.ForeignKey(
