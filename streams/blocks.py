@@ -60,7 +60,7 @@ class LessonBlock(blocks.RichTextBlock):
 
     def __init__(self, required=True, help_text=None, editor='default', features=None, validators=(), **kwargs):
         super().__init__(**kwargs)
-        self.features = ['bold', 'italic', 'link', 'h5', 'ul', 'li','image', 'superscript',]
+        self.features = ['bold', 'italic', 'link', 'h5', 'ul', 'li','image', 'superscript', 'subscript']
 
     class Meta:
         label = "Section Content"      
@@ -109,7 +109,7 @@ class SubjectBlock(blocks.StructBlock):
 class ModuleLessonDescriptionBlock(blocks.StructBlock):
     lesson_title = blocks.CharBlock(required=True, label="Lesson Name",max_length=50)
     lesson_description = blocks.CharBlock(required=True, label="Lesson Description",max_length=200)
-    lesson_page = blocks.PageChooserBlock(required=True, page_type="lesson.Beta")
+    lesson_page = blocks.PageChooserBlock(required=False, page_type="lesson.Beta")
     
     class Meta:
         template = 'streams/module_lesson_description_block.html'
