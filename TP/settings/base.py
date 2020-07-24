@@ -52,9 +52,6 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     
-    
-    
-
     'modelcluster',
     'taggit',
 
@@ -65,10 +62,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
     'django_extensions',
     'rest_framework',
+    
+    'allauth',
+    'allauth.account',
+    
+    
 
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -118,6 +123,15 @@ DATABASES = {
     }
 }
 
+
+# Authentication Backends
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

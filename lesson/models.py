@@ -50,6 +50,7 @@ class Beta(Page):
     content = StreamField(
         [
             ("test", blocks.LessonContentBlock()),   
+            ("differentiated", blocks.LessonContentDifferentiatedBlock()),  
             ('info', blocks.InfoBlock()),         
         ],
         null=True,

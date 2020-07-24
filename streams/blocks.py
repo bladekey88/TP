@@ -66,6 +66,18 @@ class LessonBlock(blocks.RichTextBlock):
         label = "Section Content"      
         
 
+class LessonBlockDifferential(blocks.RichTextBlock):
+    '''Rich Text only with Subset used for lesson '''
+    '''@TODO add chemistry and mathematics  specific functions '''
+
+    
+    def __init__(self, required=False, blank=True, null=True, help_text=None, editor='default', features=None, validators=(), **kwargs):
+        super().__init__(**kwargs)
+        self.features = ['bold', 'italic', 'link', 'h5', 'ul', 'li','image', 'superscript', 'subscript']
+
+    class Meta:
+        label = "Section Content" 
+
 class InfoBlock(blocks.RichTextBlock):
     '''Info block '''
 
@@ -87,13 +99,33 @@ class LessonContentBlock(blocks.StructBlock):
     '''Block containing Lesson Content. Each block will be wrapped ina section for css purposes'''
     
     title = blocks.CharBlock(required=True, label="Section Title",help_text="Add Section Title",max_length=40)
-    text = LessonBlock(required=True, help_text="Add Section Content")
+    text = LessonBlock(required=False, help_text="Add Section Content")
+
 
     class Meta:
         template = 'streams/lesson_content_block.html'
         icon = "doc-full"
-        label = "Lesson Sections"
+        label = "Lesson Section"
         help_text = "Each lesson section will cause  a link to be added to  sidebar for ease of navigation. Each section must have a title along with its content."
+
+
+class LessonContentDifferentiatedBlock(blocks.StructBlock):
+    '''Block containing Lesson Content. Each block will be wrapped ina section for css purposes'''
+    
+    title = blocks.CharBlock(required=True, label="Section Title",help_text="Add Section Title",max_length=40)
+    text3 = blocks.CharBlock(required=True)
+    text1 = LessonBlockDifferential(required=False, help_text="Add Section Content")
+    text2 = LessonBlock(blank=True, required=False, help_text="Add Section Content")
+    
+
+
+    class Meta:
+        template = 'streams/lesson_content__differential_block.html'
+        icon = "doc-full"
+        label = "Lesson Section (Differentiated)"
+        help_text = "Each lesson section will cause a link to be added to  sidebar for ease of navigation. Each section must have a title along with its content."
+
+
 
 
 class SubjectBlock(blocks.StructBlock):
