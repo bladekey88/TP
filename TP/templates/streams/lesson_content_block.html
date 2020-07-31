@@ -1,2 +1,31 @@
 <h4 class="lesson-section font-weight-bolder mb-2"><a id="{{self.title}}">{{self.title}}</a></h4>
-<p class="text-justify">{{self.text}}</p>
+<!-- <p class="text-justify">{{self.text}}</p> -->
+<p class="text-justify">
+    {% if self.lesson_text|length == 1 %}
+        {% for items in self.lesson_text %}    
+        {{ items.value.section_content}}
+        {% endfor %}    
+        {%elif self.lesson_text|length > 1  %}
+        <div class="lesson-differential">
+            <p class="text-center m-0 p-0 bg-dark text-white">Select the tier appropriate for this section</p>
+        <ul class=" nav nav-tabs border-dark" id="lessonLevels" role="tablist">
+            {% for items in self.lesson_text %}        
+            <li class="nav-item">
+                <a class="nav-link" id="{{items.value.targetted_level|cut:' '}}-tab" data-toggle="tab"
+                    href="#{{items.value.targetted_level|cut:' '}}" role="tab"
+                    aria-controls="{{items.value.targetted_level}}">{{ items.value.targetted_level}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="tab-content" id="lessonLevelsContent">
+            {% for items in self.lesson_text %}
+            <div class="tab-pane fade" id="{{items.value.targetted_level|cut:' '}}" role="tabpanel"
+                aria-labelledby="{{items.value.targetted_level}}-tab">
+                {{ items.value.section_content}}
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+{% endif %}
+</p>

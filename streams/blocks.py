@@ -5,6 +5,9 @@ from wagtail.images.blocks import ImageChooserBlock
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.snippets.blocks import SnippetChooserBlock
 
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
+
 class TitleAndTextBlock(blocks.StructBlock):
     '''Title and Text'''
 
@@ -57,27 +60,14 @@ class SubjectModuleBlock(blocks.StructBlock):
 class LessonBlock(blocks.RichTextBlock):
     '''Rich Text only with Subset used for lesson '''
     '''@TODO add chemistry and mathematics  specific functions '''
-
+    
     def __init__(self, required=True, help_text=None, editor='default', features=None, validators=(), **kwargs):
         super().__init__(**kwargs)
-        self.features = ['bold', 'italic', 'link', 'h5', 'ul', 'li','image', 'superscript', 'subscript']
+        self.features = ['bold', 'italic', 'link', 'h5', 'ul', 'ol','li','image', 'superscript', 'subscript']
 
     class Meta:
         label = "Section Content"      
-        
-
-class LessonBlockDifferential(blocks.RichTextBlock):
-    '''Rich Text only with Subset used for lesson '''
-    '''@TODO add chemistry and mathematics  specific functions '''
-
-    
-    def __init__(self, required=False, blank=True, null=True, help_text=None, editor='default', features=None, validators=(), **kwargs):
-        super().__init__(**kwargs)
-        self.features = ['bold', 'italic', 'link', 'h5', 'ul', 'li','image', 'superscript', 'subscript']
-
-    class Meta:
-        label = "Section Content" 
-
+ 
 class InfoBlock(blocks.RichTextBlock):
     '''Info block '''
 
@@ -85,47 +75,35 @@ class InfoBlock(blocks.RichTextBlock):
         super().__init__(**kwargs)
         self.features = ['bold', 'italic', 'h5', 'supercript','superscript',]
         self.help_text = 'This field is used to draw attention to something or highlight something of intrest'
-    
-    
-    
+
     class Meta:
         label = "Highlight" 
         template = 'streams/info.html'  
         icon="info"  
     
-    
-        
+
+class LessonContentStreamBlock(blocks.StreamBlock):
+    lesson_content =blocks.StructBlock( [
+      ('targetted_level',blocks.CharBlock(default="All", required=True,help_text="This is only displayed when using more than one content block",label="Targetted Level")),
+      ('section_content',LessonBlock(required=True))
+    ])
+
+    class Meta:
+        label = "Section Content"
+        icon = "doc-empty-inverse"
+        help_text="Sections must contain at least one content block. For section that have different requirements depending on level (e.g. Intermediate vs Higher), multiple sections can be added. It is then recommended to fill in the Content Title to differentiate the content."
+
 class LessonContentBlock(blocks.StructBlock):
     '''Block containing Lesson Content. Each block will be wrapped ina section for css purposes'''
     
     title = blocks.CharBlock(required=True, label="Section Title",help_text="Add Section Title",max_length=40)
-    text = LessonBlock(required=False, help_text="Add Section Content")
-
-
+    lesson_text = LessonContentStreamBlock(max_num=3, min_num=1, required=True, help_text="Add Section Content")
+    
     class Meta:
         template = 'streams/lesson_content_block.html'
         icon = "doc-full"
         label = "Lesson Section"
         help_text = "Each lesson section will cause  a link to be added to  sidebar for ease of navigation. Each section must have a title along with its content."
-
-
-class LessonContentDifferentiatedBlock(blocks.StructBlock):
-    '''Block containing Lesson Content. Each block will be wrapped ina section for css purposes'''
-    
-    title = blocks.CharBlock(required=True, label="Section Title",help_text="Add Section Title",max_length=40)
-    text3 = blocks.CharBlock(required=True)
-    text1 = LessonBlockDifferential(required=False, help_text="Add Section Content")
-    text2 = LessonBlock(blank=True, required=False, help_text="Add Section Content")
-    
-
-
-    class Meta:
-        template = 'streams/lesson_content__differential_block.html'
-        icon = "doc-full"
-        label = "Lesson Section (Differentiated)"
-        help_text = "Each lesson section will cause a link to be added to  sidebar for ease of navigation. Each section must have a title along with its content."
-
-
 
 
 class SubjectBlock(blocks.StructBlock):
@@ -160,3 +138,5 @@ class ModuleLessonSummaryBlock(blocks.StructBlock):
     )
     class Meta:
         template = 'streams/module_lesson_summary_block.html'
+        
+        
