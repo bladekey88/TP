@@ -1,294 +1,473 @@
 {% load static %}
 {% load wagtailcore_tags  wagtailimages_tags %}
-{% image self.banner_image max-1000x1000 as img %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeachingPeriodically</title>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/grid.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/queries.css' %}">
-    
-    {% comment %}
-        Override CSS HERE to allow user to select image from draftail
-    {% endcomment %}
-    <style>
-        header{
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{img.url}}');        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
-        rel="stylesheet">
-    <title>Teaching Periodically</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+
 </head>
 
 <body>
+
     <header>
-        <nav>
-            <div class="row navbar">
-                <img src="{% static 'img/logo.png' %}" alt="TeachingPeriodically Logo" class="logo">
-                <img src="{% static 'img/logo_banner.png' %}" alt="TeachingPeriodically Logo" class="logo-black">
-
-                <ul class="main-nav">
-                    <li><a href="#">Curriculum</a></li>
-                    <li><a href="#">Question Generator</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Slides</a></li>
-                </ul>
-                
+        <div class="container">
+            <div class="row">
+                <div class="col-5 col-sm-4">
+                    <figure>
+                        <img class="img-fluid" src="logo_banner_1.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-7 col-sm-8">
+                    <div class="float-right">
+                        <a href="#" class="btn btn-dark">Register</a>
+                        <a href="#" class="btn btn-sm btn-danger ">Log In</a>
+                    </div>
+                </div>
             </div>
-        </nav>
-        <div class="hero-text-box">
-            <h1>{{self.banner_title}}</h1>
-            
-            <h2 style="color:white">{{self.banner_subtitle|richtext}}</h2>
-            {% if self.banner_cta_studying %}          
-                <a class="btn btn-full" href="#">Start Studying!</a>
-            {% endif %}
-            <a class="btn btn-ghost" href="#">Learn More...</a>
-
         </div>
     </header>
-    <section class="section-features js--section-features">
-        <div class="row">
-            <i class="fas fa-4x fa-gem text-primary mb-4"></i>
-            <h2>Study and Learn</h2>
-            <p class="long-copy"> GCSEs and A Levels are incredibly stressful for students, especially as there is so
-                much content to remember. One of the best ways to prepare (and this does take time!) is retrieval
-                practise - the process of quizzing yourself over and over. To help students do this, we have created the
-                Question Generator - a tool that allows you to create your own quizzes from a bank of hundreds questions
-                written by expert teachers. You can create quizzes from just one topic or multiple topics and download
-                them for yourself or to use with others. </p>
+
+    <nav class="navbar navbar-expand-lg sticky-top ">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="text-white fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subject_beta.html">Subjects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Question Generator</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Contact
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="row">
-            <div class="col span-1-of-4">
-                <i class="ion-ios-book-outline icon-big"></i>
-                <h3>High Quality</h3>
-                <p>Our lessons are pupil-tested. Learn from resources that have helped others achieve 9s at GCSE and A*
-                    at A Level!</p>
+    </nav>
+
+    <section id="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
+                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="img/background-banner3.jpg" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>Teaching Periodically</h1>
+                        <p>Making bad science puns...<em>periodically!</em></p>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control" disabled="disabled"
+                                placeholder="Search TeachingPeriodically" aria-label="Search TeachingPeriodically">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-search "></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlay"></div>
             </div>
-            <div class="col span-1-of-4">
-                <i class="ion-ios-people-outline icon-big"></i>
-                <h3>Up to Date</h3>
-                <p>The lessons and resources are constantly reviewed to ensure they are of the highest quality</p>
-            </div>
-            <div class="col span-1-of-4">
-                <i class="ion-ios-people-outline icon-big"></i>
-                <h3>Easy To Use</h3>
-                <p>Our lessons use software that runs and adapts to whatever device you are using - no programs to
-                    download and easy to access anywhere.</p>
-            </div>
-            <div class="col span-1-of-4">
-                <i class="ion-ios-calendar-outline icon-big icon-big"></i>
-                <h3>Always Available</h3>
-                <p>Want to study on holiday (and who wouldn't?). Now you can! The resources are available 24 hours a
-                    day, 365 days a year.</p>
+
+    </section>
+
+    <section id="mainContent" class="mainContent">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center py-4 my-2">Get started on your learning journey today</h2>
+                </div>
+                <div class="row">
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <img class="img-fluid" src="img/bg.webp" alt="">
+                                <span class="card-information">
+                                    <span class="card-icon">
+                                        <i class="fas fa-book-reader fa-2x float-left"></i>
+                                        <span class="card-promo float-right text-center">High Quality</span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"> Our lessons are pupil-tested. Learn from resources that have
+                                    helped others achieve 9s at GCSE and A* at A Level! </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <img class="img-fluid" src="img/bg.webp" alt="">
+                                <span class="card-information">
+                                    <span class="card-icon">
+                                        <i class="fas fa-user-friends fa-2x float-left"></i>
+                                        <span class="card-promo float-right text-center">
+                                            Easy to use
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Our lessons use software that runs and adapts to whatever device
+                                    you are using - no programs to download and easy to access anywhere.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <img class="img-fluid" src="img/bg.webp" alt="">
+                                <span class="card-information">
+                                    <span class="card-icon">
+                                        <i class="fas fa-history fa-2x float-left"></i>
+                                        <span class="card-promo float-right text-center ">
+                                            Up to Date
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    The lessons and resources are constantly reviewed to ensure they are of the highest
+                                    quality.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <img class="img-fluid" src="img/bg.webp" alt="">
+                                <span class="card-information">
+                                    <span class="card-icon">
+                                        <i class="far fa-check-circle fa-2x"></i>
+                                        <span class="card-promo float-right text-center">High Quality</span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"> Our lessons are pupil-tested. Learn from resources that have
+                                    helped others achieve 9s at GCSE and A* at A Level! </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
     </section>
 
-    <section class="section-subjects">
-        <ul class="subjects-showcase clearfix">
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/Biology.png' %}" alt="Biology">
-                </figure>
-            </li>
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/Chemistry.png' %}" alt="Chemistry">
-                </figure>
-            </li>
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/Physics.png' %}" alt="Physics">
-                </figure>
-            </li>
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/English.png' %}" alt="English">
-                </figure>
-            </li>
-        </ul>
-        <ul class="subjects-showcase clearfix">
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/PE.png' %}" alt="PE">
-                </figure>
-            </li>
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/Geography.png' %}" alt="Geography">
-                </figure>
-            </li>
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/History.png' %}" alt="History">
-                </figure>
-            </li>
-            <li>
-                <figure class="subject-photo">
-                    <img src="{% static 'img/subjects/Art.png' %}" alt="Art">
-                </figure>
-            </li>
-        </ul>
+    <section id="questionGeneratorContent" class="questionGeneratorContent">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center py-4 my-2">
+                        Our Question Generator lets you
+                    </h2>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4><i class="far fa-lightbulb text-primary fa-3x"></i></h4>
+                            <h4 class="card-title">Consolidate your learning</h4>
+                            <p class="card-text">This is an excellent way to reinforce your learning, and identify any
+                                gaps or uncertainties you have</p>
+                            <hr>
+                            <button class="btn btn-dark"><a class="text-white stretched-link font-weight-bold"
+                                    href="#">Explore Generator</a></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4><i class="far fa-lightbulb text-primary fa-3x"></i></h4>
+                            <h4 class="card-title">Consolidate your learning</h4>
+                            <p class="card-text">This is an excellent way to reinforce your learning, and identify any
+                                gaps or uncertainties you have</p>
+                            <hr>
+                            <button class="btn btn-dark"><a class="text-white stretched-link font-weight-bold"
+                                    href="#">Explore Generator</a></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4><i class="far fa-lightbulb text-primary fa-3x"></i></h4>
+                            <h4 class="card-title">Consolidate your learning</h4>
+                            <p class="card-text">This is an excellent way to reinforce your learning, and identify any
+                                gaps or uncertainties you have</p>
+                            <hr>
+                            <button class="btn btn-dark"><a class="text-white stretched-link font-weight-bold"
+                                    href="#">Explore Generator</a></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4><i class="far fa-lightbulb text-primary fa-3x"></i></h4>
+                            <h4 class="card-title">Consolidate your learning</h4>
+                            <p class="card-text">This is an excellent way to reinforce your learning, and identify any
+                                gaps or uncertainties you have</p>
+                            <hr>
+                            <button class="btn btn-dark"><a class="text-white stretched-link font-weight-bold"
+                                    href="#">Explore Generator</a></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4><i class="far fa-lightbulb text-primary fa-3x"></i></h4>
+                            <h4 class="card-title">Consolidate your learning</h4>
+                            <p class="card-text">This is an excellent way to reinforce your learning, and identify any
+                                gaps or uncertainties you have</p>
+                            <hr>
+                            <button class="btn btn-dark"><a class="text-white stretched-link font-weight-bold"
+                                    href="#">Explore Generator</a></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4><i class="far fa-lightbulb text-primary fa-3x"></i></h4>
+                            <h4 class="card-title">Consolidate your learning</h4>
+                            <p class="card-text">This is an excellent way to reinforce your learning, and identify any
+                                gaps or uncertainties you have</p>
+                            <hr>
+                            <button class="btn btn-dark"><a class="text-white stretched-link font-weight-bold"
+                                    href="#">Explore Generator</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section class="stats pt-0 pb-0 bg-main d-none d-sm-block">
+        <div class="container text-center">
+            <div class="row">
+                <div class="item col-lg-3 col-md-6">
+                    <strong>64</strong>
+                    <i class="ml-2 fas fa-2x fa-book"></i>
+
+                    <p>Number of Subjects</p>
+                </div>
+                <div class="item col-lg-3 col-md-6"><strong>219</strong>
+                    <i class="ml-2 fas fa-2x fa-book"></i>
+                    <p>Number of Topics</p>
+                </div>
+                <div class="item col-lg-3 col-md-6"><strong>1948</strong>
+                    <i class="ml-2 fas fa-2x fa-question-circle"></i>
+                    <p>Number of Questions</p>
+                </div>
+                <div class="item col-lg-3 col-md-6"><strong>193</strong>
+                    <i class="ml-2 fas fa-2x fa-file"></i>
+                    <p>Files Processed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="promoUsers" class="promoUsers">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center py-4 my-2">
+                        Designed for Students and Teachers
+                    </h2>
+                </div>
+                <div class="row">
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card">
+                            <div class="card-header border-warning bg-primary">
+                                <h3 class="text-center text-white ">
+                                    For Students
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <img class="img-fluid" src="img/bg-1.jpg">
+                                <p class="card-text">
+                                    Students can access a variety of resources from random questions,
+                                    quizes, and lessons. </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card">
+                            <div class="card-header bg-danger border-warning">
+                                <h3 class="text-center text-white ">
+                                    For Teachers
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <img class="img-fluid" src="img/bg-1.jpg">
+                                <p class="card-text">
+                                    Teachers can also access a variety of resources from random questions, quizes, and
+                                    lessons. </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card">
+                            <div class="card-header bg-info border-warning">
+                                <h3 class="text-center text-white ">
+                                    For Parents
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <img class="img-fluid" src="img/bg-1.jpg">
+                                <p class="card-text">
+                                    Parents</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+                        <div class="card">
+                            <div class="card-header bg-success border-warning">
+                                <h3 class="text-center text-white ">
+                                    For Everyone
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <img class="img-fluid" src="img/bg-1.jpg">
+                                <p class="card-text">
+                                    Knowledge is Power</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
 
     </section>
 
-    <section class="section-steps">
-        <div class="row">
-            <h2>How to use the Question Generator</h2>
-        </div>
-        <div class="row">
-            <div class="col span-1-of-2 steps-box">
-                <img src="{% static 'img/question.png' %}" alt="questiongenerator" class="question-generator">
-            </div>
-            <div class="col span-1-of-2 steps-box">
-                <div class="works-step">
-                    <div>1</div>
-                    <p>Access the website (which you've already done - good going)</p>
-                </div>
-                <div class="works-step">
-                    <div>2</div>
-                    <p>Navigate to Question Generator and choose your subject of interest</p>
-                </div>
-                <div class="works-step">
-                    <div>3</div>
-                    <p>Choose one of the three topic options. Your questions will appear.</p>
-                </div>
-
-            </div>
-    </section>
-
-
-    <section class="section-boards">
-        <div class="row">
-            <h2>We cover subjects from these Exam Boards</h2>
-        </div>
-        <div class="row">
-            <div class="col span-1-of-4 box">
-                <img src="{% static '/img/edexcel.webp' %}" alt="Edexcel">
-                <h3>Edexcel (Pearson)</h3>
-                <div class="exam-feature">
-                    <a href="https://qualifications.pearson.com/en/home.html">Visit Website (External)</a>
-                </div>
-            </div>
-            <div class="col span-1-of-4 box">
-                <img src="{% static '/img/aqa.jpg' %}" alt="AQA">
-                <h3>AQA</h3>
-                <div class="exam-feature">
-                    <a href="www.aqa.org.uk">Visit Website (External)</a>
-                </div>
-            </div>
-            <div class="col span-1-of-4 box">
-                <img src="{% static '/img/ocr.jpg' %}" alt="OCR">
-                <h3>OCR</h3>
-                <div class="exam-feature">
-                    <a href="www.ocr.org.uk">Visit Website (External)</a>
-                </div>
-
-            </div>
-            <div class="col span-1-of-4 box">
-                <img src="{% static '/img/WJEC.png' %}" alt="WJEC">
-                <h3>WJEC</h3>
-                <div class="exam-feature">
-                    <a href="www.wjec.co.uk">Visit Website (External)</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="section-testimonials">
-        <div class="row">
-            <h2>Functionality for Students and Teachers</h2>
-        </div>
-        <div class=row>
-            <div class="col  span-1-of-3">
-                <blockquote>
-                    Students can access a variety of resources from random questionsm, quizes, and lessons.
-                    <cite>
-                        <img src="{% static '/img/student.png' %}" alt="student-icon">
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Teachers can access a variety of resources from random questionsm, quizes, and lessons.
-                    <cite>
-                        <img src="{% static '/img/teacher.png' %}" alt="teacher-female-icon">
-                    </cite>
-                </blockquote>
-            </div>
-            <div class="col span-1-of-3">
-                <blockquote>
-                    Teachers can access a variety of resources from random questionsm, quizes, and lessons.
-                    <cite>
-                        <img src="{% static '/img/teacher2.png' %}" alt="teacher-male-icon">
-                    </cite>
-                </blockquote>
-            </div>
-        </div>
-
-    </section>
-    <section>
-
-    </section>
 
     <footer>
-        <div class="row">
-            <div class="col span-1-of-2">
-                <ul class="footer-nav">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Data Protection</a></li>
-                    <li><a href="#">Privacy</a></li>
-                </ul>
-
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h1>Join Now</h1>
+                </div>
             </div>
-            <div class="col span-1-of-2">
-                <ul class="social-icons">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                </ul>
+            <div class="row">
+                <p class="col">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                    nisi
+                </p>
+            </div>
+
+            <div class="CTAs"><a href="#" class="btn btn-primary">Sign Up</a><a href="#"
+                    class="btn btn-outline-light">Learn more</a></div>
+        </div>
+        <hr>
+        <div class="nav-footer container text-center text-md-left">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>Browse</h4>
+                    <ul>
+                        <li>Subjects</li>
+                        <li>Question Generator</li>
+                        <li>Teaching Resources</li>
+                        <li>Slides</li>
+                        <li>Help</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <h4>About Teaching Periodically</h4>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Privacy Policy</li>
+                        <li>Register</li>
+                        <li>Login</li>
+                        <li>Data Protection</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li>BBC Bitesize</li>
+                        <li>Chemguide</li>
+                        <li>Wikipedia</li>
+                        <li>Youtube</li>
+                        <li>Google</li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <div id="copyright" class="text-center h4 font-weight-light text-lighter">&copy 2020 TeachingPeriodically</div>
 
-        <div class="row">
-            <p>
-                Copyright &copy; 2020 by TeachingPeriodically
-            </p>
-        </div>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="{%static '/vendor/jquery.waypoints.js' %}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
     <script>
-        $(document).ready(function () {
-            $(".js--section-features").waypoint(function (direction) {
-                if (direction == "down") {
-
-                    $('nav').addClass('sticky');
-                }
-                else {
-                    $('nav').removeClass('sticky');
-                }
-            }, {
-                offset: '600px'
-            })
-
-        })
+        $('.carousel').carousel({
+            interval: 5000
+        });
     </script>
-
 </body>
-
-
 
 </html>
