@@ -1,0 +1,28 @@
+{% load wagtailcore_tags  wagtailimages_tags %}
+
+<div class="col-12">
+    <h2 class="text-center py-4 my-2">{{self.information_title}}</h2>
+</div>
+
+<div class="row">
+    {% for card in self.information_cards %}
+    
+    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="card shadow">
+            <div class="card-header">
+                {% image card.value.Image scale-100 as card_img %}
+                <img class="img-fluid" src="  {{card_img.url}}" alt="{{card_img.alt}}">
+                <span class="card-information">
+                    <span class="card-icon">
+                        <i class="{{card.value.Icon}} fa-2x float-left"></i>
+                        <span class="card-promo float-right text-center">{{card.value.Title}}</span>
+                    </span>
+                </span>
+            </div>
+            <div class="card-body">
+                <p class="card-text"> {{card.value.Text}} </p>
+            </div>
+        </div>
+    </div>
+    {% endfor card %}
+</div>

@@ -1,0 +1,32 @@
+{% load wagtailcore_tags  wagtailimages_tags %}
+
+<div class="col-12">
+    <h2 class="text-center py-4 my-2">{{self.question_title}}</h2>
+</div>
+
+<div class="row">
+    {% for card in self.question_cards %}
+    
+
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4><i class="{{card.value.Icon}} text-primary fa-3x"></i></h4>
+                <h4 class="card-title">{{card.value.Title}} </h4>
+                <p class="card-text">{{card.value.Text}}</p>
+                <hr>
+                {% if card.value.URL %}
+                    <button class="btn btn-dark">
+                        <a class="text-white stretched-link font-weight-bold"
+                        href="{{card.value.URL}}">{{card.value.link_title}}</a>
+                    </button>
+                {% else %}
+                    <br><br>
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor card %}
+</div>

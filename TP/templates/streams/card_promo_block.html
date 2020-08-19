@@ -1,0 +1,28 @@
+{% load wagtailcore_tags  wagtailimages_tags %}
+
+<div class="col-12">
+    <h2 class="text-center py-4 my-2">{{self.promo_title}}</h2>
+</div>
+
+<div class="row">
+    {% for card in self.promo_user_cards %}
+    
+    <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="card">
+            <div class="card-header border-warning bg-{{card.value.BootStrap_Color}}">
+                <h3 class="text-center text-white ">
+                    {{card.value.Title}}
+                </h3>
+            </div>
+            <div class="card-body">
+                {% image card.value.Image scale-100 as card_img %}
+                 <img class="img-fluid" src="{{card_img.url}}" alt="{{card_img.alt}}">
+                <p class="card-text">
+                    {{card.value.Text}} </p>
+            </div>
+        </div>
+    </div>
+
+   
+    {% endfor card %}
+</div>

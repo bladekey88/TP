@@ -139,4 +139,56 @@ class ModuleLessonSummaryBlock(blocks.StructBlock):
     class Meta:
         template = 'streams/module_lesson_summary_block.html'
         
+
+class CardStreamBlock(blocks.StreamBlock):
+    information_content =blocks.StructBlock( [
+      ('Image',ImageChooserBlock( required=True,help_text="This is the header image of the card",label="Information Card Image")),
+      ('Icon',blocks.CharBlock(required=True)),
+      ('Title',blocks.CharBlock(required=True)),
+      ('Text',blocks.CharBlock(required=True)),   
+      ('BootStrap_Color', blocks.CharBlock(required=False, max_length=7, min_length=0))   
+    ])
+
+    class Meta:
+        icon = "doc-empty-inverse"
         
+class CardQuestionStreamBlock(blocks.StreamBlock):
+    geneartor_promo_content =blocks.StructBlock( [
+      ('Icon',blocks.CharBlock(required=True)),
+      ('Title',blocks.CharBlock(required=True)),
+      ('Text',blocks.CharBlock(required=True)),     
+      ('URL',blocks.URLBlock(required=False, label="URL (Optional)")) ,
+      ('link_title',blocks.CharBlock(required=False, label="URL Title")) ,
+      
+    ])
+
+    class Meta:
+        icon = "doc-empty-inverse"
+        label = "Question Generator Promotional Card"
+        
+       
+class CardBlock(blocks.StructBlock):
+    information_title = blocks.CharBlock(required=True, max_num=1, length=40)
+    information_cards = CardStreamBlock(required=True, min_num=4,max_num=4, help_text="Add Information Cards")
+    
+    class Meta:
+        template = 'streams/card_info_block.html'
+        icon = "help"
+        
+class CardQuestionBlock(blocks.StructBlock):
+    question_title = blocks.CharBlock(required=True, max_num=1, length=40, label="Question Generator Section Heading", default="Our Question Generator lets you")
+    question_cards = CardQuestionStreamBlock(required=True, min_num=3,max_num=6, help_text="Add Question Cards")
+
+    class Meta:
+        template = 'streams/card_generator_block.html'
+        icon = "help"
+               
+class CardPromoBlock(blocks.StructBlock):           
+    promo_title = blocks.CharBlock(required=True, max_num=1, length=40, label="Promo Section Heading", default="Designed for Students and Teachers")
+    promo_user_cards = CardStreamBlock(required=True, min_num=4,max_num=4, help_text="Add Promotional User Cards")
+    
+    class Meta:
+        template = 'streams/card_promo_block.html'
+        icon = "help"
+            
+
