@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+{% load wagtailimages_tags static %}
+
+
+
+{% block banner %}
+<section class="module-banner">
+    <div class="container">
+        <div class="col text-center">
+            <h1>{{self.title}}</h1>
+            <p class="lead">
+                Some description here Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas, neque
+                libero earum
+                doloremque minus fuga optio. Voluptatibus pariatur sit voluptates dolore culpa amet placeat
+                molestiae illo
+                facilis optio, aspernatur ipsa consequatur asperiores laboriosam nulla similique eaque quod
+                voluptatum
+                cumque temporibus. Totam qui ullam aut excepturi dolorem suscipit natus id tempora!
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock banner %}
+
+{% block content %}
+<section id="modules" class="modules">
+    <div class="container">
+        <div class="row d-flex">
+            {% for module in modules %}
+            <div class="col-sm-6 col-md-4 d-flex">
+                <div class="subject-card card rounded border-0 shadow">
+                    <img class="rounded-top card-image-top"
+                        src="https://jobs.newscientist.com/getasset/c40a5488-11be-43b0-843f-a2e6ef9f0612/">
+                    <div class="keystage-indicator text-center text-white h5">
+                        {{self.title}}
+                    </div>
+                    <div class="card-body text-left rounded-top">
+                        <div class="text-center font-weight-bolder h4 text-grey">
+                            <a class="stretched-link" href="{{module.url}}">{{module}}</a>
+                        </div>
+                        <div class="module-description d-none d-sm-block">
+                            <p>
+                                {{module.specific.description|safe}}
+                                <!-- <button class="btn btn-block btn-primary"><a class=" font-weight-bolder text-light stretched-link" href="{{module.url}}">View Module</a></button> -->
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="d-block d-sm-none d-lg-block  chapter-info rounded-bottom text-white text-center text-lg-left">
+                        <span class="font-weight-bolder chapter-info-heading text-light">Chapter Information</span>
+                        <ol class="chapter-info-list">
+                            {% for a in module.specific.lesson_summary.stream_data %}
+                            <li>{{a.value.lesson_chapter}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            {% endfor modules %}
+        </div>
+    </div>
+</section>
+
+
+
+{% comment %}
+{% for module in modules %}
+{{ module.specific.lesson_summary.stream_data|length}}
+{{ module.specific.lesson_summary.stream_data}}
+<p></p>
+{% for a in module.specific.lesson_summary.stream_data %}
+<p></p>
+{{a.value.lesson_chapter}}
+<p></p>
+{% endfor %}
+{% endfor %}
+
+{% endcomment %}
+
+
+
+{% endblock content %}
+
+{%block extra_js %}
+<script src="/static/js/test.js"></script>
+{% endblock extra_js %}
