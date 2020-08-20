@@ -79,6 +79,7 @@ class HomePage(Page):
             ObjectList(information_panels, heading="Information Section"),
             ObjectList(generator_panels, heading="Question Generator Section"),
             ObjectList(promotional_panels, heading="Promotional Section"),
+            # ObjectList(Page.settings_panels,heading="Settings Stuff"),
         ]
     )
     

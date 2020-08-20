@@ -22,3 +22,7 @@ ENV/
 env.bak/
 venv.bak/
 .vscode
+
+##Database
+db.sqlite3
+*sqlite3*

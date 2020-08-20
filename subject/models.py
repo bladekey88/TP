@@ -27,7 +27,7 @@ class SubjectPage(Page):
         blank=False
      )
     
-    categories = ParentalManyToManyField("subject.SubjectCategory", blank=False)
+    categories = ParentalManyToManyField("subject.SubjectCategory", blank=True)
     
     content_panels = Page.content_panels + [
         StreamFieldPanel('subject'),
@@ -104,7 +104,7 @@ class SubjectKSLandingPage(Page):
         class Meta:
             verbose_name = "Key Stage Description for Subject"
         
-        templates  = 'subject/subject_KS_landing_page.html'
+        templates  = 'subject/subject_ks_landing_page.html'
         parent_page_types = ["subject.SubjectLandingPage"]
                
         description = models.TextField(
