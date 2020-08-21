@@ -10,8 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -27,7 +33,7 @@ debug = False
 SECRET_KEY = '4g=c%jsu=urh2-bu3x8$!pfus7(fr7e+=zz73(=7nx3gj+g@ft'
 
 
-ALLOWED_HOSTS = ['localhost','www.teachingperiodically.com','3.11.69.77']
+ALLOWED_HOSTS = ['localhost','www.teachingperiodically.com','3.11.69.77', '*']
 
 # Application definition
 
@@ -75,6 +81,9 @@ INSTALLED_APPS = [
     
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',    
+    'allauth.socialaccount.providers.google',
+    
     
     
 
@@ -123,23 +132,23 @@ WSGI_APPLICATION = 'TP.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-    # 'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wagtail',
-        'USER': 'wagtail',
-        'PASSWORD': 'ntbmYMShcTI5SSjW',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'wagtail',
+#         'USER': 'wagtail',
+#         'PASSWORD': 'ntbmYMShcTI5SSjW',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 # Authentication Backends
 AUTHENTICATION_BACKENDS = (
@@ -228,20 +237,39 @@ REST_FRAMEWORK = {
     ]
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = "username_email
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "HTTPs
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "HTTPS"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGTH = 5
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 1
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+SOCIALACCOUNT_QUERY_EMAIL=ACCOUNT_EMAIL_REQUIRED 
+SOCIALACCOUNT_EMAIL_REQUIRED=ACCOUNT_EMAIL_REQUIRED
+
+SOCIALACCOUNT_PROVIDERS = {
+     'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
+LOGIN_REDIRECT_URL = "/"
+
+## SENTRY STUFF ##
 sentry_sdk.init(
     dsn="https://2c576dce6ee644af989cc6c361bc01a1@o436418.ingest.sentry.io/5397569",
     integrations=[DjangoIntegration()],
