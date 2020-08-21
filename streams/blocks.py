@@ -110,7 +110,7 @@ class SubjectBlock(blocks.StructBlock):
     subject_name = blocks.CharBlock(required=True,label="Subject Name",max_length=30)
     subject_icon = blocks.CharBlock(required=True,label="FontAwesome Subject Icon",min_length=5, max_length=20, help_text="Insert icon name from FA website. For example <i class='fas fa-adjust'></i> should be entered as fa-adjust", default="fa-")
     subject_description = blocks.CharBlock(required=True, label="Subject description", max_length=70)
-    subject_page = blocks.PageChooserBlock(required=True, page_type="subject.SubjectLandingPage",)
+    subject_page = blocks.PageChooserBlock(required=False, page_type="subject.SubjectLandingPage",)
     subject_categories = SnippetChooserBlock('subject.SubjectCategory',required=True,)
     
     class Meta:

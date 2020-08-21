@@ -1,0 +1,211 @@
+/* ----- BASIC SETUP----- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway' !important;
+}
+
+html {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Raleway', 'Ariel', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+
+.clearfix {
+    zoom: 1
+}
+
+.clearfix:after {
+    content: ' ';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.row {
+    max-width: 1140px;
+    margin: 10 auto;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    float: left;
+}
+
+.logo-black {
+    width: auto;
+    float: left;
+    margin: 5px 0px;
+    display: none;
+    height: 50px;
+}
+
+.main-nav {
+    float: right;
+    list-style: none;
+    margin-top: 25px
+}
+
+.main-nav li {
+    display: inline;
+    margin-left: 40px;
+}
+
+.main-nav li a:link, .main-nav li a:visited {
+    padding: 8px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom 0.3s,
+}
+
+.main-nav li a:active, .main-nav li a:hover {
+    border-bottom: 3px solid #2b7ce6;
+}
+
+.navbar-nav li a:link, .navbar-nav li a:visited {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom 0.2s, font-weight 0.5s;
+}
+
+.navbar-nav li a:active, .navbar-nav li a:hover {
+    border-bottom: px solid #fff;
+}
+
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+nav {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(7, 12, 59, 0.98);
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 2px #efefef;
+    z-index: 9999;
+    transition: margin-top 0.5s, display 0.5s;
+}
+
+.sticky .navbar-nav {
+    margin-top: 10px;
+}
+
+.sticky .main-nav li a:link, .sticky .main-nav li a:visited, .sticky .navbar-nav li a:link, .sticky .navbar-nav li a:visited {
+    padding: 2px 10px;
+    color: #efefef;
+    font-weight: normal;
+}
+
+.sticky .main-nav li a:hover, .sticky .main-nav li a:active, .sticky .navbar-nav li a:hover, .sticky .navbar-nav li a:active {
+    border-bottom: 3px solid #fff;
+}
+
+.sticky .logo {
+    display: none
+}
+
+.sticky .logo-black {
+    display: block;
+    margin-left: 150px;
+    margin-top: 15px;
+    max-height: 50px;
+    width: auto;
+}
+
+/* BLOCKQUOTE SETTINGS */
+
+blockquote {
+    font-size: 0.85rem;
+    width: 100%;
+    margin: 1rem auto;
+    font-style: italic;
+    color: #555555;
+    padding: 1rem 1.5rem 1.2rem 2.5rem;
+    border-left: 8px solid #78C0A8;
+    text-align: center;
+    line-height: 1.5;
+    position: relative;
+    background: #EDEDED;
+}
+
+blockquote::before {
+    font-family: Arial;
+    content: "\201C";
+    color: #78C0A8;
+    font-size: 4em;
+    position: absolute;
+    left: 10px;
+    top: -10px;
+}
+
+blockquote::after {
+    content: '';
+}
+
+blockquote p {
+    margin-bottom: 0.5rem;
+}
+
+blockquote span {
+    display: block;
+    color: #333333;
+    font-style: normal;
+    font-weight: lighter;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+img.subject {
+    vertical-align: middle;
+    border-style: none;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.9;
+  
+}
+
+section.subject-description {
+    width: 100%;
+    margin: 0.5rem auto;
+    color: #555555;
+    padding: 1rem 1rem 0.5rem 1rem;
+    line-height: 1.5;
+    position: relative;
+}
+
+section.keystage{
+    background-color: #e6f6fc;
+}
+
+
+
+h3 {
+    font-weight: 400;
+    font-size: 26px;
+}
+
+.img-fluid{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border-style: none;
+}
