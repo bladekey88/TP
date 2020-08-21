@@ -23,3 +23,9 @@ env.bak/
 venv.bak/
 .vscode
 db.sqlite3
+
+openid/
+socialaccount/
+account/
+accounts/
+base.py
