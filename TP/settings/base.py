@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'site_settings',
     'subject',
     'lesson',
-
- 
+    'menus',
     
     'wagtail.core',
     'wagtail.contrib.forms',
