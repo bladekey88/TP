@@ -75,6 +75,8 @@ INSTALLED_APPS = [
     
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',    
+    'allauth.socialaccount.providers.google',
     
     
 
@@ -213,7 +215,7 @@ WAGTAIL_SITE_NAME = "TP"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = 'https://www.teachingperiodically.com'
 
 
 REST_FRAMEWORK = {
@@ -228,15 +230,34 @@ REST_FRAMEWORK = {
     ]
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = "username_email
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "HTTPs
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "HTTPS"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGTH = 5
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 1
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+SOCIALACCOUNT_QUERY_EMAIL=ACCOUNT_EMAIL_REQUIRED 
+SOCIALACCOUNT_EMAIL_REQUIRED=ACCOUNT_EMAIL_REQUIRED
+LOGIN_REDIRECT_URL = "/"
+
+SOCIALACCOUNT_PROVIDERS = {
+     'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 
 import sentry_sdk
