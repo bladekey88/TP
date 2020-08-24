@@ -8,6 +8,7 @@ from wagtail.snippets.blocks import SnippetChooserBlock
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
+
 class TitleAndTextBlock(blocks.StructBlock):
     '''Title and Text'''
 
@@ -120,7 +121,15 @@ class ModuleLessonDescriptionBlock(blocks.StructBlock):
     lesson_title = blocks.CharBlock(required=True, label="Lesson Name",max_length=50)
     lesson_description = blocks.CharBlock(required=True, label="Lesson Description",max_length=200)
     lesson_page = blocks.PageChooserBlock(required=False, page_type="lesson.Beta")
-    
+   
+    def get_context(self, value, parent_context=None):
+         from lesson.models import TrackUserPage
+         context = super().get_context(value, parent_context=parent_context)
+         user = parent_context.get('request').user
+         context['text'] = parent_context.get('modules')
+         context['gamma'] = TrackUserPage.objects.filter(user=user)
+         return context
+   
     class Meta:
         template = 'streams/module_lesson_description_block.html'
         

@@ -1,4 +1,6 @@
 from .base import *
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 DEBUG = False
 
@@ -9,3 +11,13 @@ try:
     from .local import *
 except ImportError:
     pass
+
+## SENTRY STUFF ##
+sentry_sdk.init(
+    dsn="https://2c576dce6ee644af989cc6c361bc01a1@o436418.ingest.sentry.io/5397569",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)

@@ -23,6 +23,7 @@
 {% endblock banner %}
 
 {% block content %}
+{{gamma}}
 <section class="lesson">
     <div class="container">
         <div class="row">
@@ -30,7 +31,7 @@
                 {%for block in self.lesson_summary %}
                 {% include_block block %}
                 {%endfor%}
-
+                
             </div>
             <div class="col-md-4">
                 <aside>

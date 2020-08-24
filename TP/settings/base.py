@@ -15,8 +15,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     'subject',
     'lesson',
     'menus',
+    'profiles',
     
     'wagtail.core',
     'wagtail.contrib.forms',
@@ -268,12 +268,4 @@ SOCIALACCOUNT_PROVIDERS = {
 
 LOGIN_REDIRECT_URL = "/"
 
-## SENTRY STUFF ##
-sentry_sdk.init(
-    dsn="https://2c576dce6ee644af989cc6c361bc01a1@o436418.ingest.sentry.io/5397569",
-    integrations=[DjangoIntegration()],
 
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)

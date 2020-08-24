@@ -1,10 +1,35 @@
 <div class="card-body border">
+    <!-- {{id}}
+    {{text}} -->
+    
+        
+  
+<!--     
+    {% for module in modules %}
+        {{module.id}}
+    {% endfor %} -->
+    <!-- {{self.lesson_page.id}} -->
     <h5>
-        <span class="dot bg-default"></span>
+        {%for lessons in progress %}
+            {% for lesson in lessons %}
+                {% if self.lesson_page.id == lesson.page_id %}    
+                {% if lesson.status == "IP" %}
+                    <span class="dot bg-warning"></span>
+                {%elif lesson.status == "CO" %}
+                    <span class="dot bg-success"></span>
+                {%elif lesson.status == "AB" %}
+                    <span class="dot bg-danger"></span>
+                {% elif lesson.status == "NS" %}
+                    <span class="dot bg-default"></span>
+                {%endif%}
+            {%endif%}
+            {%endfor%}
+        {%endfor%}
+        
         {{self.lesson_title}}
     </h5>
     <p>
         {{self.lesson_description}}
     </p>
-    <p><a class="btn btn-dark btn-sm btn-block stretched-link" href="{{self.lesson_page.url}}">View Lesson - {{self.lesson_page}}</a></p>
+    <p><a class="btn btn-dark btn-sm btn-block" href="{{self.lesson_page.url}}">View Lesson - {{self.lesson_page}}</a></p>
 </div>
