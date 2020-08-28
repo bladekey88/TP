@@ -17,13 +17,3 @@ header {
     background-color: #02246b;
 }
 
-.button {
-    background-color: #001440 !important;
-    color: #fff;
-}
-
-.button:hover {
-    background-color: #02246b !important;
-    color: rgb(223, 223, 223);
-    font-weight: bolder;
-}
