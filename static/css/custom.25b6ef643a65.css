@@ -1,0 +1,18 @@
+/* ADMIN CSS OVERRIDE */
+
+header {
+    background-color: #001440
+}
+
+.nav-wrapper .inner {
+    background-color: #111;
+    box-shadow: #001440;
+}
+
+.nav-main a {
+    background-color: #ffd800
+}
+
+.nav-main a:hover {
+    background-color: rgba(98, 98, 98, 0.561);
+}
