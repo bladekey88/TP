@@ -10,7 +10,7 @@ from wagtail.snippets.models import register_snippet
 from modelcluster.fields import ParentalManyToManyField
 
 from streams import blocks
-from lesson.models import Beta
+from lesson.models import Beta,TrackUserPage
 
 class SubjectPage(Page):
     '''Page with all subjects on'''
@@ -175,32 +175,9 @@ class ModuleLandingPage(Page):
         def get_context(self,request,*args,**kwargs):
             context = super().get_context(request,*args,**kwargs)
             context["modules"] = self.get_children().live().public().specific()
-            context['test'] = Beta.objects.live().public().all().specific()
+            # context['test'] = Beta.objects.live().public().all().specific()  
+            lesson_progress = []
+            for module in context["modules"]:
+                lesson_progress.append(TrackUserPage.objects.filter(user=request.user,page=module))
+            context['progress'] = lesson_progress
             return context
-
-
-# class SubjectKeyStageCard(Orderable):
-#     '''Between 1 and 4 '''
-
-#     page = ParentalKey('subject.SubjectLandingPage', related_name='key_stage_card')
-#     title = models.CharField(max_length=20, null=False, blank=False, unique=True, help_text="Enter the Key Stage Level")
-#     description = RichTextField(max_length=200, null=False, blank=False, help_text="Enter information about what this Key Stage covers", features=['h4', 'h5', 'bold', 'italic', ])
-
-    
-#     content = StreamField(
-#         [
-#             ("test", blocks.SubjectModuleBlock()),
-            
-#         ],
-#         null=True,
-#         blank=True
-#     )
-    
-    
-#     panels = [
-#         FieldPanel('title', heading="Key Stage"),
-#         RichTextFieldPanel('description'),
-#         StreamFieldPanel('content'),
-#     ]
-
-    

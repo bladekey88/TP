@@ -40,9 +40,8 @@ INSTALLED_APPS = [
     'subject',
     'lesson',
     'menus',
-
- 
-    
+    'profiles',
+        
     'wagtail.core',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -78,9 +77,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',    
     'allauth.socialaccount.providers.google',
-    
-    
-
 ]
 
 SITE_ID = 1
@@ -239,6 +235,7 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "HTTPS"
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 50
