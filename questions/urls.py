@@ -12,4 +12,8 @@ app_name = 'questions'
 urlpatterns = [
     path('', views.index, name='index'),
     path('subject/',views.addsubject,name="addsubject"),
+    path('topic/',views.topic,name="topic"),
+    path('topic/add/',views.addtopic,name="addtopic"),
+    
+    
 ]

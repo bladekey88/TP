@@ -11,7 +11,7 @@ from search import views as search_views
 
 urlpatterns = [
     
-    path('question/', include('questions.urls')),
+    path('question-generator/', include('questions.urls')),
     path('accounts/', include('allauth.urls')),
     url(r'^django-admin/', admin.site.urls),
     url(r'^admin/', include(wagtailadmin_urls)),
