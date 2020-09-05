@@ -2,36 +2,100 @@
 
 
 {% block title %} Subjects {% endblock title %}
+{% block extra_css %}
+<style>
+    .card-outer {
+        background-color: #f1f1f1;
+    }
 
+    .card-inner {
+        transition: 0.1s;
+    }
 
+    .card-inner:hover {
+        background-color: rgb(207, 229, 253);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.431) !important;
+        scale: 1.05;
+    }   
 
+</style>
+{% endblock %}
 
 
 {% block content %}
 <div class="container">
-    <div class="card card-border border-dark shadow">
-        <div class="card-header text-uppercase ">
-            <h6 class="text-center font-weight-bolder ">There are {{subjects|length}} subjects</h6>
-        </div>
-        <div class="card-body bg-white text-uppercase text-center float-center">
-            {% for s in subjects %}
-            {% if forloop.counter0|divisibleby:4 %}
-            <div class="card-deck">
-                {% endif %}
 
+    <!-- PAGE HEADER-->
+    <div class="main-header pt-5 text-uppercase">
+        <h2 class="text-center font-weight-bolder">
+            Question Generator Subjects
+        </h2>
+    </div>
 
-                <div class="ml-4 mb-1 card border-dark text-center" style="max-width: 15rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href='{{ s.subjectid }}'>{{s.subjectname|upper}}</a></h5>
+    <!-- SUBJECT CARDS-->
+    <div class="my-3 card border-gray border-1 mb-5">
+        <div class="card-body card-outer text-center">
+              
+            <div class="d-flex justify-content-between py-1">
+                <p>Click on a subject for more information</p>
+                <p class="text-center">
+                    {% if subjects|length == 1 %}
+                    There is 1 subject
+                    {% else %}
+                    There are {{subjects|length}} subjects
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="card border-0 ">
+                {% if perms.questions.add_subject%}
+
+                <div class="card-header border-0">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="d-flex text-left justify-content-between">
+                            <div class="content pt-2 d-none d-sm-block">
+                                <p>
+                                    <i class="fas fa-info-circle"></i>
+                                    <strong>Note: </strong>
+                                    Users with the <code>editteacher</code> role can add and edit subjects</p>
+                            </div>
+
+                            <a  href={% url 'questions:addsubject' %} class=" pt-2 text-white align-middle">
+                                <button class= "text-uppercase btn btn-sm border-primary rounded-0 btn-info text-white font-weight-bolder">                                
+                                    Add subject
+                                </button>
+                            </a>
+                                
+
+                            
+
+                        </div>
                     </div>
 
-                </div>
 
-                {% if forloop.counter|divisibleby:4 %}
-            </div><br>
-            {% endif %}
-            {% endfor %}
+
+                    {% endif %}
+                </div>
+                <div class="card-body bg-white border-0">
+                    {% for s in subjects %}
+                    {% if forloop.counter0|divisibleby:4 %}
+                    <div class="card-deck">
+                        {% endif %}
+                        <div class="ml-4 mb-1 card-inner card border-primary text-white text-center"
+                            style="max-width: 15rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><a class="stretched-link"
+                                        href='{% url 'questions:editsubject' s.subjectname %}'>{{s.subjectname|upper}}</a></h5>
+                            </div>
+                        </div>
+                        {% if forloop.counter|divisibleby:4 %}
+                    </div><br>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
+

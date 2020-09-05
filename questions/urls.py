@@ -12,6 +12,8 @@ app_name = 'questions'
 urlpatterns = [
     path('', views.index, name='index'),
     path('subject/',views.addsubject,name="addsubject"),
+    path('subject/<str:subjectname>', views.editSubject, name='editsubject'),
+    path('subject/<str:subjectname>/delete', views.deleteSubject, name='deletesubject'),
     path('topic/',views.topic,name="topic"),
     path('topic/add/',views.addtopic,name="addtopic"),
     

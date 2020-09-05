@@ -14,3 +14,10 @@ class AddTopicForm(forms.ModelForm):
     class Meta:
         model = Topic
         fields = ['topicname']        
+        
+        
+class EditSubjectForm(forms.ModelForm):
+    
+    class Meta:
+        model = Subject
+        fields = ['subjectname']    

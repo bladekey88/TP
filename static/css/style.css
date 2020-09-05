@@ -41,6 +41,11 @@ h2 {
     margin-bottom: 60px;
 }
 
+a:hover {
+    text-decoration: none !important; 
+    font-weight: bolder;
+}
+
 /***********
 ** HEADER **
 ************/
