@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm
-from django.http import HttpResponse
+from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm, AddTopicForm,EditTopicForm
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Subject, Topic
 
@@ -49,11 +49,18 @@ def editSubject(request, subjectname):
     if request.method =="POST":
         form = EditSubjectForm(request.POST,instance=subject)
         new_subjectname = request.POST['subjectname']
-        if form.is_valid():
+        all_subjects =  [x.upper() for x in  Subject.objects.all().values_list('subjectname',flat=True)]
+        
+        if new_subjectname.upper() in all_subjects:
+            messages.error(request, '<b>Error: </b><em>{}</em> already exists. Validation is case-insensitive (e.g. it and IT will be treated the same for validation against existing subjects).'.format(new_subjectname))
+            new_subjectname = subjectname
+        
+        elif form.is_valid():
             form.save()
             messages.success(request, '<b>Success</b>: </b><em>{}</em> has been updated successfully'.format(new_subjectname))
 
-            return redirect('questions:editsubject', subjectname=new_subjectname)
+        return redirect('questions:editsubject', subjectname=new_subjectname)
+    
     else:
         form = EditSubjectForm(instance = subject)
 
@@ -73,7 +80,13 @@ def deleteSubject(request, subjectname):
    
     return redirect("questions:editsubject",subjectname=subjectname)
 
-
+###################################
+######## TOPIC SECTION ##########
+###################################
+######### CONTAINS ALL ############
+######### VIEWS RELATING ##########
+########## TO TOPIC ############
+###################################
     
 def topic(request):    
     topics = Topic.objects.all()
@@ -103,7 +116,59 @@ def addtopic(request):
                 messages.error(request, '<b>Error:</b> The value entered "{}" is invalid. This may be due to an character or a processing error.<br>Please try again. If you encounter further errors please contact a staff member.'.format(topic_name))
 
             return redirect('questions:addtopic')
-
     else:
         form = AddTopicForm()
         return render(request, 'questions/topic_add.html', {'form': form, })
+
+@login_required
+@permission_required('questions.change_topic',raise_exception=True)
+def editTopic(request, topicid):
+    topic = get_object_or_404(Topic,pk=topicid)
+    
+    if request.method =="POST":
+        form = EditTopicForm(request.POST,instance=topic)
+        new_topicname = request.POST['topicname']
+        all_topics =  [x.upper() for x in  Topic.objects.all().values_list('topicname',flat=True)]
+        
+        if new_topicname.upper() in all_topics:
+            messages.error(request, '<b>Error: </b><em>{}</em> already exists. Validation is case-insensitive (e.g. C1 and c1 will be treated the same for validation against existing topics).'.format(new_topicname))
+        
+        elif form.is_valid():
+            form.save()
+            messages.success(request, '<b>Success</b>: </b><em>{}</em> has been updated successfully.'.format(new_topicname))
+            
+
+        return redirect('questions:topic-detail', topicid=topicid)
+    else:
+        form = EditTopicForm(instance = topic)
+
+    return render(request, 'questions/topic_edit.html', {'topic':topic,'topicid':topicid, 'form':form})
+
+
+@permission_required('questions.delete_topic',raise_exception=True)
+def deleteTopic(request, topicid):
+    from .utils import createTicketForTopicDelete
+    topic = Topic.objects.get(pk=topicid)
+    raiseTicket = createTicketForTopicDelete(topic,request.user)
+    if raiseTicket==201:
+        messages.success(request, "<b>Success:</b> The topic '<em>{}</em>' has been flagged for deletion.".format(topic))
+    else:
+        messages.error(request, "<b>Error:</b> The topic '<em>{}</em>' could not be flagged for deletion - you may have already requested its deletion. Please try again in 60 seconds, or contact a Staff Member.".format(topic))
+
+    return redirect("questions:edittopic",topicid=topicid)
+
+
+def topicdetail(request, topicid):
+    try:
+        
+        #questions_linked_to_topic = Question.objects.filter(topicid=topicid)
+        topic  = Topic.objects.get(pk=topicid)
+        questions_linked_to_topic = topic.question_set.all()
+        subjects = set()
+        for s in questions_linked_to_topic:
+            subjects.add((int(s.subjectid_id), s.subjectid))
+        subject = sorted(subjects)
+    except Topic.DoesNotExist:
+        raise Http404("The Topic does not exist or is not currently accessible to you.")
+    return render(request, 'questions/topicdetail.html', {'topic':topic, 'question': questions_linked_to_topic, 'subject' : subject})
+    #return HttpResponse("Looking at topic details for TopicID: {} ".format(topicid))

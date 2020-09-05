@@ -21,3 +21,10 @@ class EditSubjectForm(forms.ModelForm):
     class Meta:
         model = Subject
         fields = ['subjectname']    
+        
+class EditTopicForm(forms.ModelForm):
+    
+    class Meta:
+        model = Topic
+        fields = ['topicname']
+        

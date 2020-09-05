@@ -10,12 +10,17 @@ from django.urls import include
 app_name = 'questions'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index, name='subject'),
     path('subject/',views.addsubject,name="addsubject"),
     path('subject/<str:subjectname>', views.editSubject, name='editsubject'),
     path('subject/<str:subjectname>/delete', views.deleteSubject, name='deletesubject'),
+    
     path('topic/',views.topic,name="topic"),
     path('topic/add/',views.addtopic,name="addtopic"),
+    path('topic/<int:topicid>', views.topicdetail, name='topic-detail'),
+    path('topic/add',views.addtopic, name='addtopic'),
+    path('topic/<int:topicid>/edit', views.editTopic, name='edittopic'),
+    path('topicid/<int:topicid>/delete', views.deleteTopic, name='deletetopic'),
     
     
 ]
