@@ -15,6 +15,18 @@ class SubjectAdmin(admin.ModelAdmin):
     readonly_fields = ('subjectid', )  
     ordering = ['subjectname']
 
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [        
+        ("Question Information", {'fields': ['questiontext','questionanswer']}),
+        ("Subject Information", {'fields': ['topicid', 'subjectid']}),
+    ]
+    list_display = ('questionid','questiontext', 'questionanswer', 'subjectid', 'topicid', )
+    search_fields = ['questiontext', 'questionanswer', 'topicid__topicname', 'subjectid__subjectname']
+    list_filter  = ['subjectid', 'topicid']
+    readonly_fields = ('questionid', )  
+    ordering = ['questionid']
+
+
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Topic)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)

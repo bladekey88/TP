@@ -1,9 +1,11 @@
+from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm, AddTopicForm,EditTopicForm
+from .models import Subject, Topic, Question
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm, AddTopicForm,EditTopicForm
+from django.db.models import Count
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import Subject, Topic
 
 
 ###################################
@@ -172,3 +174,15 @@ def topicdetail(request, topicid):
         raise Http404("The Topic does not exist or is not currently accessible to you.")
     return render(request, 'questions/topicdetail.html', {'topic':topic, 'question': questions_linked_to_topic, 'subject' : subject})
     #return HttpResponse("Looking at topic details for TopicID: {} ".format(topicid))
+    
+###################################
+######## QUESTIONS SECTION ##########
+###################################
+######### CONTAINS ALL ############
+######### VIEWS RELATING ##########
+########## TO QUESTIONS ############
+###################################    
+    
+def question(request):
+    question_count = Question.objects.values('subjectid', 'subjectid__subjectname').order_by('subjectid').annotate(dcount=Count('subjectid'))
+    return render(request, 'questions/questions.html', {'question_count':question_count})

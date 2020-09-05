@@ -17,10 +17,11 @@ urlpatterns = [
     
     path('topic/',views.topic,name="topic"),
     path('topic/add/',views.addtopic,name="addtopic"),
-    path('topic/<int:topicid>', views.topicdetail, name='topic-detail'),
-    path('topic/add',views.addtopic, name='addtopic'),
-    path('topic/<int:topicid>/edit', views.editTopic, name='edittopic'),
-    path('topicid/<int:topicid>/delete', views.deleteTopic, name='deletetopic'),
+    path('topic/<int:topicid>/', views.topicdetail, name='topic-detail'),
+    path('topic/add/',views.addtopic, name='addtopic'),
+    path('topic/<int:topicid>/edit/', views.editTopic, name='edittopic'),
+    path('topic/<int:topicid>/delete/', views.deleteTopic, name='deletetopic'),
     
+    path('questions/', views.question, name='question'), 
     
 ]
