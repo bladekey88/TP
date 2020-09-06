@@ -1,6 +1,7 @@
-from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm, AddTopicForm,EditTopicForm
-from .models import Subject, Topic, Question
+from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm, AddTopicForm,EditTopicForm, DocumentForm
+from .models import Document, Question, Subject, Topic, User
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Count
@@ -15,7 +16,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 ######### VIEWS RELATING ##########
 ########## TO SUBJECT ############
 ###################################
-
+@login_required
 def index(request): #TO CHANGE TO PROPER NAME
     subjects = Subject.objects.all().order_by("subjectname")
     return render(request, 'questions/subject.html', {'subjects':subjects})
@@ -176,13 +177,66 @@ def topicdetail(request, topicid):
     #return HttpResponse("Looking at topic details for TopicID: {} ".format(topicid))
     
 ###################################
-######## QUESTIONS SECTION ##########
+######## QUESTIONS SECTION ########
 ###################################
 ######### CONTAINS ALL ############
 ######### VIEWS RELATING ##########
-########## TO QUESTIONS ############
+########## TO QUESTIONS ###########
 ###################################    
     
 def question(request):
     question_count = Question.objects.values('subjectid', 'subjectid__subjectname').order_by('subjectid').annotate(dcount=Count('subjectid'))
     return render(request, 'questions/questions.html', {'question_count':question_count})
+
+@login_required
+@permission_required('question.view_question',raise_exception=True)
+def questionlist(request,subjectname):
+    try:
+        question  = Question.objects.filter(subjectid__subjectname=subjectname)        
+    except Question.DoesNotExist:
+        raise Http404("The Question does not exist or it not currently accessible to you.")
+
+    if len(question) == 0:
+        raise Http404("The Question does not exist or it not currently accessible to you.")
+
+    return render(request, 'questions/questionsubject.html', {'question':question} )
+ 
+###################################
+######## UPLOAD SECTION ########
+###################################
+######### CONTAINS ALL ############
+######### VIEWS RELATING ##########
+########## TO UPLOAD ###########
+###################################    
+@login_required
+@permission_required('questions.add_document',raise_exception=True)
+def fileupload(request):
+    uploader = User.objects.get(pk=request.user.id)
+    if request.method == 'POST':       
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload_data = form.save(commit=False)
+            upload_data.uploaded_by = uploader
+            upload_data = form.save()
+            #form.user = request.user
+            
+            request.session['filepath'] = str(upload_data)
+            # sendMessage(request,getSystemID(),request.user.id,"File Upload",fileUploadMessage(request,request.session['filepath']))
+            return redirect('questions:fileuploadsuccess')
+    else:
+        form = DocumentForm()
+    return render(request, 'questions/model_form_upload.html', {'form': form, })
+
+
+
+@login_required
+@permission_required('questions.add_document',raise_exception=True)
+def fileupload_success(request):
+
+    if "filepath" not in request.session:
+        return redirect('questions:fileupload')
+    else:
+        #return HttpResponse(settings.MEDIA_URL)
+        uploaded_url = request.session['filepath']
+        media_url = str(settings.MEDIA_URL[1:])
+        return render(request, 'questions/fileupload_success.html', {'full_url': media_url + uploaded_url})

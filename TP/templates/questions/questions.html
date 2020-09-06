@@ -25,7 +25,7 @@
         <td>{{q.subjectid}}</td>
         <td>{{q.subjectid__subjectname}}</td>
         <td>{{q.dcount}}</td>
-        <td><a href="#">View Questions</a></td>
+        <td><a href="{% url 'questions:questionlist' subjectname=q.subjectid__subjectname %}">View Questions</a></td>
       </tr>
       {% endfor %}
 

@@ -23,5 +23,10 @@ urlpatterns = [
     path('topic/<int:topicid>/delete/', views.deleteTopic, name='deletetopic'),
     
     path('questions/', views.question, name='question'), 
+    path('question/<str:subjectname>',views.questionlist,name='questionlist'),
+    
+        
+    path('fileupload/', views.fileupload, name='fileupload'),
+    path('fileupload/success/', views.fileupload_success, name='fileuploadsuccess'),
     
 ]

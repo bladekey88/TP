@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subject, Topic,Question
+from .models import Document, Question, Subject, Topic
 
 
 #Set all blank values
@@ -26,7 +26,28 @@ class QuestionAdmin(admin.ModelAdmin):
     readonly_fields = ('questionid', )  
     ordering = ['questionid']
 
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ['get_file_name' , 'subject', 'uploaded_by', 'uploaded_at']
+    readonly_fields = ['uploaded_by', 'uploaded_at','subject', 'get_file_path', 'get_file_name', 'document_id']
+    exclude = ('document',)
 
+
+
+class DocumentInline(admin.TabularInline):
+    model = Document
+    extra = 0
+    can_delete = False
+    verbose_name_ = "Uploaded File"
+    fk_name = 'uploaded_by'
+    readonly_fields = ['uploaded_by', 'uploaded_at','subject', 'get_file_name', 'get_file_path', 'description']
+    exclude = ('document',)
+
+
+    def has_add_permission(self,request, obj=None):
+        return False
+
+
+admin.site.register(Document, DocumentAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Topic)
 admin.site.register(Question, QuestionAdmin)
