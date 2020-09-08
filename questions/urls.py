@@ -26,7 +26,10 @@ urlpatterns = [
     path('question/<str:subjectname>',views.questionlist,name='questionlist'),
     
         
-    path('fileupload/', views.fileupload, name='fileupload'),
-    path('fileupload/success/', views.fileupload_success, name='fileuploadsuccess'),
+    path('file-upload/', views.fileupload, name='fileupload'),
+    path('file-upload/success/', views.fileupload_success, name='fileuploadsuccess'),
     
+    path('generate/', views.makeQuestion, name='subject_add'),
+    path('ajax/load-topics/', views.load_topics, name='ajax_load_topics'),
+    path('createquestions/', views.createQuestions, name='createquestions'),
 ]

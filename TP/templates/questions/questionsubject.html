@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}Questions for {{question.0.subjectid}}{% endblock title %}
 
-{% block customcss %}
+{% block extra_css %}
 <link href='{% static "/vendor/datatables/datatables.min.css" %}' rel="stylesheet" type="text/css">
-{% endblock customcss %}
+{% endblock %}
 
 {% block sidebar %} {% endblock sidebar %}
 
@@ -46,7 +46,7 @@
 {% endblock content %}
 
 
-{% block footerjs %}
+{% block extra_js %}
 <script src='{% static "/vendor/datatables/datatables.min.js" %}'></script>
 <script src='{% static "/vendor/datatables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js" %}'></script>
 
@@ -91,4 +91,4 @@
 </script>
 
 
-{% endblock footerjs %}
+{% endblock extra_js %}

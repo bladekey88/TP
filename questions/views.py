@@ -1,4 +1,4 @@
-from .forms import AddSubjectForm, AddTopicForm,EditSubjectForm, AddTopicForm,EditTopicForm, DocumentForm
+from .forms import *
 from .models import Document, Question, Subject, Topic, User
 
 from django.conf import settings
@@ -8,7 +8,8 @@ from django.db.models import Count
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect,get_object_or_404
 
-
+import random
+import json
 ###################################
 ######## SUBJECT SECTION ##########
 ###################################
@@ -240,3 +241,152 @@ def fileupload_success(request):
         uploaded_url = request.session['filepath']
         media_url = str(settings.MEDIA_URL[1:])
         return render(request, 'questions/fileupload_success.html', {'full_url': media_url + uploaded_url})
+    
+    
+    
+##########################################
+##########################################
+##########################################
+####################################################
+######### SELECT QUESTIONS FOR RANDOMNESS ##########
+####################################################
+# @login_required
+def makeQuestion(request):
+        if request.method == 'POST':
+            
+            form = QuestionForm(request.POST)
+ 
+            response_data = {}
+            response_data['topicid'] = request.POST.getlist('topicid[]')
+            response_data['subjectid'] = request.POST['subjectid']
+            response_data['choice_field'] = request.POST['customRadio']
+            # response_data['choice_field'] = request.POST['choice_field']
+            if 'number_of_questions' in request.POST:
+                response_data['number_of_questions'] = request.POST['number_of_questions']
+            
+            request.session['questiondata'] = response_data
+            
+            return redirect('questions:createquestions')
+        else:
+            form = QuestionForm()
+
+        # return render(request, 'upload/question_form.html', {'form': form, })
+        return render(request, 'questions/question_generator_form.html', {'form': form, })
+
+# @login_required
+def createQuestions(request):
+
+
+    if "questiondata" not in request.session:
+        return redirect('questions:subject_add')
+    else:
+        subject_id = request.session['questiondata']['subjectid']
+        topic_id = request.session['questiondata']['topicid']
+        choice_field = request.session['questiondata']['choice_field']
+    
+        subject_name = Subject.objects.get(pk=subject_id) 
+        #choice 1 'oneFromEach'  - 1 Question From Each Selected Topic 
+        #choice 2 - 'tenFromEach'  ALl Questions For subject by topic   
+        #choice 3  - 'fromMany' ANy Questions from selected topics
+        
+        # raise Exception()
+        if choice_field == 'fromMany':
+            number_of_questions = str(request.session['questiondata']['number_of_questions'])
+        elif choice_field=='tenFromEach':
+            request.session['subject'] = subject_id
+            subject =  request.session['subject']
+            return render(request,'questions/createquestions.html', {'subject':subject, 'choice_field' : choice_field, 'subject_name':subject_name })
+        else:
+            number_of_questions = str(1)
+          
+        
+
+        question_list = []
+        
+        for topic in topic_id:
+
+            question_dict = {}
+            question_dict[topic] = []
+            question = Question.objects.filter(subjectid = subject_id, topicid = topic)
+
+            
+            for q in question:
+                # raise Exception(topic, q.questiontext, q.questionanswer)
+                question_dict[topic].append([str(q.topicid),q.questiontext,q.questionanswer])
+            question_list.append(question_dict)
+        del(question_dict)
+
+        
+
+        question_output = {}
+        question_multi_output = []
+
+   
+
+        for topics in question_list:
+            for k,v in topics.items():
+                question_output[k] = []
+                if number_of_questions=='1' and choice_field=='oneFromEach':
+                    question_output[k].append(random.choice(v))
+                    qm = None
+                    qm_json = question_output   
+                else:
+                    for topic in v:
+                        if topic not in question_multi_output:
+                            question_multi_output.append(topic)
+        
+        
+        if question_multi_output:
+            #randomise the list 
+            random.shuffle(question_multi_output)
+            qm = []
+
+            ## Do a check to make sure that if we have fewer questions in the bank then specified, 
+            ## return them all
+
+            if len(question_multi_output) < (int(number_of_questions)):
+                for x in range(0,len(question_multi_output)):
+                    qm.append(question_multi_output[x])
+                    question_output = None
+                messages.warning(request, '<b>Warning:</b> The number of questions requested was greater than the total number of questions available for the selected subject and topic(s). Therefore, the  system has returned all possible questions. ')
+                
+            else:
+                for x in range(0, int(number_of_questions)):
+                    qm.append(question_multi_output[x])
+                    question_output = None  
+
+            qm_json = json.dumps(qm)   
+        
+        subject_name = Subject.objects.get(pk=subject_id)       
+
+        context = {
+            'subject' : subject_id,
+            'subject_id' : subject_id,
+            'subject_name': subject_name,
+            'topic_id' : topic_id, 
+            'choice_field' : choice_field, 
+            'number_of_questions' : int(number_of_questions),
+            'qo':question_output,
+            'qm':qm,
+            'qm_json': qm_json,
+        }
+
+        return render(request, 'questions/createquestions.html', context)
+
+def load_topics(request):
+    subject_id = request.GET.get('subject')
+    topics = Question.objects.filter(subjectid=subject_id).order_by('topicid__topicname').values_list('topicid_id','topicid__topicname', flat=False).distinct()
+    question_count =  Question.objects.filter(subjectid=subject_id).count()
+    
+    top_topics = Question.objects.filter(subjectid=subject_id).values_list("topicid__topicname").annotate(total=Count("topicid__topicname")).order_by('-total')
+    top_ten_topic = "{}".format(",".join("'" + t[0] + "'" for t in top_topics))
+    top_ten_totals = [topic[1] for topic in top_topics]
+
+    context = {
+        'top_topics' : str(top_ten_topic),
+        'totals' : top_ten_totals,
+        'topics':topics,
+        'question_count': question_count
+    }
+
+    return render(request, 'questions/topic_dropdown_list_options.html', context)
