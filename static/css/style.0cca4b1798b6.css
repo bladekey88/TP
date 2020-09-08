@@ -11,16 +11,11 @@ body {
     margin: 0;
     background-color: #fff;
     color: #2d4050;
-    -webkit-font-smoothing: antialiased!important
+    -webkit-font-smoothing: antialiased!important;
+    position: relative;
 }
 
-hr {
-    border: 0;
-    height: 20px;
-    background: url("img/bg.4e1fa0609cde.webp");
-    margin: 0;
-    padding: 0;
-}
+
 
 h1 {
     font-size: 3rem;
@@ -374,6 +369,11 @@ nav {
 /***********
 ** FOOTER **
 ************/
+main::after {
+    content: '';
+    display: block;
+    height: 50px; /* Set same as footer's height */
+  }
 
 footer {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("logo_footer.bbee6106607e.png") center 100px no-repeat rgba(0, 0, 0, 0.6);
@@ -385,6 +385,9 @@ footer {
     text-align: center;
     font-size: 0.75rem;
     border-top: 1px solid #272727;
+    bottom: 0;
+    position: absolute;
+    
 }
 
 footer p {

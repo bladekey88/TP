@@ -11,9 +11,10 @@ body {
     margin: 0;
     background-color: #fff;
     color: #2d4050;
-    -webkit-font-smoothing: antialiased!important;
-    position: relative;
+    -webkit-font-smoothing: antialiased!important
 }
+
+
 
 h1 {
     font-size: 3rem;
@@ -35,48 +36,10 @@ h2 {
 }
 
 a:hover {
-    text-decoration: none !important;
+    text-decoration: none !important; 
     font-weight: bolder;
 }
 
-label {
-    display: inline;
-  }
-
-  .controls {
-    display: inline;
-  }
-  .textinput {
-    width: 75%;
-    height: 1 00%;
-  }
-  
-  input {
-  border: 2px solid;
-  border-radius: 4px;
-  font-size: 1rem;
-  margin: 0.25rem;
-  min-width: 125px;
-  padding: 0.5rem;
-  transition: border-color 0.5s ease-out;
-}
-input:optional {
-  border-color: gray;
-}
-input:required:valid {
-  border-color: green;
-}
-input:invalid {
-  border-color: red;
-}
-input:required:focus:valid {
-  background: url("https://assets.digitalocean.com/labs/icons/hand-thumbs-up.svg") no-repeat 95% 50% lightgreen;
-  background-size: 25px;
-}
-input:focus:invalid {
-  background: url("https://assets.digitalocean.com/labs/icons/exclamation-triangle-fill.svg") no-repeat 95% 50% lightsalmon;
-  background-size: 25px;
-}
 /***********
 ** HEADER **
 ************/
@@ -250,7 +213,7 @@ nav {
 ************/
 
 .main {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(img/learn.jpg) #1c1c1c;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("img/learn.590a22047a36.jpg") #1c1c1c;
     position: relative;
     color: #8c8c8c;
     font-weight: 600;
@@ -405,10 +368,15 @@ nav {
 /***********
 ** FOOTER **
 ************/
-
+body::after {
+    content: '';
+    display: block;
+    height: 50px; /* Set same as footer's height */
+  }
+  
 footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(logo_footer.png) center 100px no-repeat rgba(0, 0, 0, 0.6);
-    background: linear-gradient(#08054285, #080542), url(logo_footer.png) center 100px no-repeat rgba(0, 0, 0, 0.6);
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("logo_footer.bbee6106607e.png") center 100px no-repeat rgba(0, 0, 0, 0.6);
+    background: linear-gradient(#08054285, #080542), url("logo_footer.bbee6106607e.png") center 100px no-repeat rgba(0, 0, 0, 0.6);
     box-shadow: 3px 3px 10px rgba(2, 2, 2, 0.4);
     color: #fff;
     width: 100%;
@@ -416,6 +384,9 @@ footer {
     text-align: center;
     font-size: 0.75rem;
     border-top: 1px solid #272727;
+    bottom: 0;
+    position: absolute;
+    
 }
 
 footer p {
@@ -450,10 +421,6 @@ footer p {
     margin-top: 4rem;
 }
 
-#copyright.h4 {
-    margin-bottom: 0 !important
-}
-
 footer hr {
     background: black;
     margin: 20px 0;
@@ -476,7 +443,7 @@ footer hr {
     position: relative;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('/static/img/subjects.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url("/static/img/subjects.8a8df516a34f.jpeg");
     background-position: center;
     background-size: cover;
 }
@@ -742,7 +709,7 @@ ul.subject-categories li.active a {
     position: relative;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .4);
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('/static/img/chemistry-banner.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url("/static/img/chemistry-banner.24c7bfaffd07.jpg");
     background-position: center;
     background-size: cover;
 }
@@ -851,7 +818,7 @@ ul.subject-categories li.active a {
     color: #fff;
     position: relative;
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url('/static/img/chemistry-subject-banner.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.788), rgba(48, 48, 51, 0.788)), url("/static/img/chemistry-subject-banner.3444d40c6999.jpeg");
     background-position: center;
     background-size: cover;
 }
@@ -898,7 +865,7 @@ ul.subject-categories li.active a {
     color: #fff;
     position: relative;
     width: 100%;
-    background: linear-gradient(rgba(2, 12, 27, 0.671), rgba(8, 33, 71, 0.925)), url('/static/img/atoms.jpg');
+    background: linear-gradient(rgba(2, 12, 27, 0.671), rgba(8, 33, 71, 0.925)), url("/static/img/atoms.c96054204835.jpg");
     background-position: center;
     background-size: cover;
 }

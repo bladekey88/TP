@@ -1,6 +1,12 @@
+{% extends 'core/base.html' %}
 {% load static %}
 {% load wagtailcore_tags  wagtailimages_tags %}
 
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+{% endblock %}
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,8 +78,8 @@
                 </ul>
             </div>
         </div>
-    </nav>
-
+    </nav> -->
+{% block content %}
     <section id="carousel">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -160,9 +166,9 @@
             </div>
         </div>
 </section>
+{% endblock content %}
 
-
-    <footer>    
+    <!-- <footer>    
         {% if request.user.is_anonymous %}
         <div class="container">
             <div class="row">
@@ -240,4 +246,4 @@
     </script>
 </body>
 
-</html>
+</html> -->
