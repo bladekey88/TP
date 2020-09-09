@@ -1,0 +1,157 @@
+{% extends "core/base.html" %}
+
+{% block title %} Question Generator{% endblock title %}
+
+{% block pageheading %}Subject Details{% endblock pageheading %}
+
+
+{% block extra_css %}
+<style>
+    .card {
+        margin: 30px 10px !important;
+
+
+    }
+
+    .card-body {
+        margin: 0;
+        padding: 10px 20px;
+    }
+
+    .card-student {
+        background-color: #dae6f0;
+
+
+    }
+
+    .card-teacher {
+        background-color: #f1f1f1;
+
+    }
+
+
+    .title-name {
+        position: relative;
+        display: block;
+        bottom: 20px;
+        font-size: 1.25rem;
+        color: #000000;
+        background-color: rgb(151, 151, 185);
+        text-transform: uppercase;
+        padding: 5px 0;
+
+    }
+
+    .link-text {
+        font-size: 1rem;
+
+    }
+
+
+    .card .card:hover {
+        transition: all 0.2s;
+        box-shadow: 5px 5px 15px 5px #00000060
+    }
+
+    .card a {
+        color: inherit;
+        padding-bottom: 1px;
+        border: 0;
+        transition: all 0.2s;
+    }
+
+    a.disabled {
+        cursor: not-allowed;
+        color: gray !important;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- PAGE HEADER-->
+    <div class="main-header pt-5 text-uppercase">
+        <h3 class="text-center font-weight-bolder">
+            The Question Generator
+        </h3>
+    </div>
+
+    <div class="card-group text-center ">
+
+        <div class="card  card-student border-0 ">
+            <div class="card-body">
+                <span class="text-center font-weight-bolder title-name">For Students</span>
+
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-info text-uppercase">
+                            <i class="fas fa-2x fa-question-circle"></i><br>
+                            <span class="font-weight-bolder d-block mt-3 link-text">
+                                <a class="stretched-link" href="{% url 'questions:subject_add'%}">View
+                                    Questions</a></span>
+                        </h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card  card-teacher">
+            <div class="card-body">
+                <span class="font-weight-bolder text-center title-name">
+                    For Teachers
+                </span>
+                <div class="card-group text-center">
+
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger text-uppercase">
+                                <i class="fas fa-2x fa-graduation-cap"></i><br>
+                                <span class="font-weight-bolder d-block mt-3 link-text">
+                                    <a class="stretched-link" href="{% url 'questions:subject'%}">View and Edit
+                                        Subjects</a></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger text-uppercase">
+                                <i class="fas fa-2x fa-chalkboard"></i><br>
+                                <span class="font-weight-bolder d-block mt-3 link-text">
+                                    <a class="stretched-link" href="{% url 'questions:topic'%}">
+                                        View and Edit Topics</a></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger text-uppercase">
+                                <i class="fas fa-2x fa-file-import"></i><br>
+                                <span class="font-weight-bolder d-block mt-3 link-text">
+                                    <a href="#" disabled class="stretched-link disabled">
+                                        Upload Files
+                                    </a>
+                                </span>
+                            </h5>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+{% endblock content %}

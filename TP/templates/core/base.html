@@ -216,6 +216,19 @@
   {% block extra_js %}
   {# Override this in templates to add extra javascript #}
   {% endblock %}
+  <script>
+    $(document).ready(function() {
+      // Gets the path
+      var url = $(location).attr('href');
+      $('.navbar-nav li').find('.active').removeClass('active');
+      $('.navbar-nav li a').filter(function () {
+      var current_url = ($(this).prop("href"))
+      return current_url==url;         
+        }).parent().addClass("active"); 
+      })
+
+    
+</script>
 </body>
 
 </html>

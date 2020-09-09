@@ -132,6 +132,11 @@ nav {
     padding: 0 1rem;
 }
 
+.nav-item.active a {
+    font-weight: 800;
+    color: #ffd800;
+}
+
 .nav-link {
     color: white;
     text-transform: uppercase;

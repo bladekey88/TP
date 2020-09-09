@@ -2,37 +2,52 @@
 
 {% block title %}{{subject}}{% endblock title %}
 
-{% block sidebar %} {% endblock sidebar %}
-
 {% block pageheading %}Subject Details{% endblock pageheading %}
 
 {% load crispy_forms_tags %}
+
+{% block extra_css %}
+<style>
+  .card {
+    margin: 30px 0;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-
-
-<div class="card card-bordered shadow">
-    <div class="card-header text-justify text-wrap  font-weight-light">
+<div class="container">
+  <!-- PAGE HEADER-->
+  <div class="main-header pt-5 text-uppercase">
+    <h2 class="text-center font-weight-bolder">
       {% if perms.questions.change_subject%}Edit Subject Details{% else %}Subject Details{% endif %}
+    </h2>
   </div>
   
-  <div class="card-body">
-  {% if perms.questions.change_subject%}
-  <h6 class="alert alert-info"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;The subject should be entered as you'd expect it to appear <em>e.g. IT, Chemistry, PE, English Literature.</em></h6>
+  <div class="card card-bordered text-center {% if not perms.questions.change_subject%}shadow{% endif %}">
+    {% if perms.questions.change_subject %}
+    <div class="card-header text-center text-wrap  font-weight-light">
+      The subject should be entered as you'd expect it to appear <em>e.g. IT, Chemistry, PE, English Literature. </div>
+    {% endif %}
 
-    <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form | crispy }}
+    <div class="card-body">
+      {% if perms.questions.change_subject%}
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
     </div>
-  <div class="card-footer">
-    <input type="submit" value="Update"  class="btn border-dark btn-primary">
-    <input type="reset" value="Reset"  class="btn btn-info border-dark">
-    <a href='{% url "questions:deletesubject" subjectname=subjectname %}'><button type="button" class="btn border-dark bg-danger text-white visible">Delete</button></a>
+    <div class="card-footer">
+      <input type="submit" value="Update" class="btn  btn-primary">
+      <input type="reset" value="Reset" class="btn btn-danger">
+      {% if perms.questions.delete_subject %}
+      <a href='{% url "questions:deletesubject" subjectname=subjectname %}'><button type="button"
+          class="btn border-dark bg-dark text-white visible">Delete</button></a>
+      {% endif %}
 
-      </div>
-  </form>
-  {% else %}
-  <label for="subjectname">Subject Name</label>
-  <input type="text" id="subjectname" class="form-control" aria-readonly="true" readonly value="{{subject}}">
+    </div>
+    </form>
+    {% else %}
+    <label for="subjectname">Subject Name</label>
+    <h5>{{subject}}</h5>
   </div>
 
 
