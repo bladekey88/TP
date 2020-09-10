@@ -9,6 +9,7 @@
 <style>
     .card {
         margin: 30px 10px !important;
+        border: #cac7f3 solid 0.5px !important;
 
 
     }
@@ -47,6 +48,16 @@
 
     }
 
+    .card-group {
+        flex-flow: column;
+    }
+
+    @media (min-width: 992px) {
+        .card-group {
+            flex-flow: row;
+        }
+    }
+
 
     .card .card:hover {
         transition: all 0.2s;
@@ -64,11 +75,24 @@
         cursor: not-allowed;
         color: gray !important;
     }
-
 </style>
 {% endblock %}
 
 {% block content %}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">
+                <i class="fas fa-home"></i>
+              </a></li>>
+            <li class="active">Question Generator</li>
+
+        </ul>
+    </div>
+</div>
+
 <div class="container">
     <!-- PAGE HEADER-->
     <div class="main-header pt-5 text-uppercase">
@@ -79,7 +103,7 @@
 
     <div class="card-group text-center ">
 
-        <div class="card  card-student border-0 ">
+        <div class="card  card-student ">
             <div class="card-body">
                 <span class="text-center font-weight-bolder title-name">For Students</span>
 
@@ -97,7 +121,7 @@
             </div>
         </div>
 
-        <div class="card  card-teacher">
+        <div class="card  card-border card-teacher">
             <div class="card-body">
                 <span class="font-weight-bolder text-center title-name">
                     For Teachers
@@ -109,8 +133,7 @@
                             <h5 class="card-title text-danger text-uppercase">
                                 <i class="fas fa-2x fa-graduation-cap"></i><br>
                                 <span class="font-weight-bolder d-block mt-3 link-text">
-                                    <a class="stretched-link" href="{% url 'questions:subject'%}">View and Edit
-                                        Subjects</a></span>
+                                    <a class="stretched-link" href="{% url 'questions:subject'%}">Subjects</a></span>
                             </h5>
                         </div>
                     </div>
@@ -120,7 +143,7 @@
                                 <i class="fas fa-2x fa-chalkboard"></i><br>
                                 <span class="font-weight-bolder d-block mt-3 link-text">
                                     <a class="stretched-link" href="{% url 'questions:topic'%}">
-                                        View and Edit Topics</a></span>
+                                        Topics</a></span>
                             </h5>
                         </div>
                     </div>

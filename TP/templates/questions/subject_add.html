@@ -14,8 +14,22 @@
 
 {% block content %}
 
-<div class="container">
+<div class="breadcrumbs">
+  <div class="container">
+      <ul class="breadcrumb">
+        <li>
+          <a href="/">
+          <i class="fas fa-home"></i>
+        </a></li>>
+        <li><a href="/question-generator">Question Generator</a></li>>
+          <li><a href="/question-generator/subject">Subjects</a></li>>
+          <li class="active">Add Subject</li>
+      </ul>
+  </div>
+</div>
 
+<div class="container">
+  
   <!-- PAGE HEADER-->
   <div class="main-header pt-5 text-uppercase">
     <h2 class="text-center font-weight-bolder">
@@ -23,6 +37,7 @@
     </h2>
   </div>
 
+  
 
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Note: </strong> Only users with the <code>editteacher</code> role can add subjects.

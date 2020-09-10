@@ -12,6 +12,23 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <ul class="breadcrumb">
+          <li>
+            <a href="/">
+            <i class="fas fa-home"></i>
+          </a></li>>
+          <li><a href="/question-generator">Question Generator</a></li>>
+            <li><a href="/question-generator/topic">Topics</a></li>>
+            <li><a href="/question-generator/topic/{{topic.topicid}}">{{topic}}</a></li>>
+            <li class="active">Edit Topic</li>
+        </ul>
+    </div>
+  </div>
+
+  
 <div class="container">
     <!-- PAGE HEADER-->
     <div class="main-header pt-5 text-uppercase">

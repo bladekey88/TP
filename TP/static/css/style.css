@@ -262,6 +262,12 @@ nav {
     padding: 60px 0;
 }
 
+@media (min-width: 992px) {
+    main {
+        min-height: 100px;
+    }
+}
+
 .main h1 {
     text-transform: uppercase;
     color: #fff;

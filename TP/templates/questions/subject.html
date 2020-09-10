@@ -16,13 +16,25 @@
         background-color: rgb(207, 229, 253);
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.431) !important;
         scale: 1.05;
-    }   
-
+    }
 </style>
 {% endblock %}
 
 
 {% block content %}
+<div class="breadcrumbs">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">
+                <i class="fas fa-home"></i>
+              </a></li>>
+            <li><a href="/question-generator">Question Generator</a></li>>
+            <li class="active">Subject</li>
+        </ul>
+    </div>
+</div>
+
 <div class="container">
 
     <!-- PAGE HEADER-->
@@ -35,7 +47,7 @@
     <!-- SUBJECT CARDS-->
     <div class="my-3 card border-gray border-1 mb-5">
         <div class="card-body card-outer text-center">
-              
+
             <div class="d-flex justify-content-between py-1">
                 <p>Click on a subject for more information</p>
                 <p class="text-center">
@@ -57,17 +69,18 @@
                                 <p>
                                     <i class="fas fa-info-circle"></i>
                                     <strong>Note: </strong>
-                                    Users with the <code>editteacher</code> role can add and edit subjects</p>
+                                    Users with the <code>editteacher</code> role can add and edit subjects.</p>
                             </div>
 
-                            <a  href={% url 'questions:addsubject' %} class=" pt-2 text-white align-middle">
-                                <button class= "text-uppercase btn btn-sm border-primary rounded-0 btn-info text-white font-weight-bolder">                                
+                            <a href={% url 'questions:addsubject' %} class=" pt-2 text-white align-middle">
+                                <button
+                                    class="text-uppercase btn btn-sm border-primary rounded-0 btn-info text-white font-weight-bolder">
                                     Add subject
                                 </button>
                             </a>
-                                
 
-                            
+
+
 
                         </div>
                     </div>
@@ -85,7 +98,8 @@
                             style="max-width: 15rem;">
                             <div class="card-body">
                                 <h5 class="card-title"><a class="stretched-link"
-                                        href='{% url 'questions:editsubject' s.subjectname %}'>{{s.subjectname|upper}}</a></h5>
+                                        href='{% url 'questions:editsubject' s.subjectname %}'>{{s.subjectname|upper}}</a>
+                                </h5>
                             </div>
                         </div>
                         {% if forloop.counter|divisibleby:4 %}
@@ -98,4 +112,3 @@
     </div>
 </div>
 {% endblock %}
-

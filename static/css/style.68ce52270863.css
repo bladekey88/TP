@@ -15,8 +15,6 @@ body {
     position: relative;
 }
 
-
-
 h1 {
     font-size: 3rem;
     line-height: 3rem;
@@ -37,10 +35,48 @@ h2 {
 }
 
 a:hover {
-    text-decoration: none !important; 
+    text-decoration: none !important;
     font-weight: bolder;
 }
 
+label {
+    display: inline;
+  }
+
+  .controls {
+    display: inline;
+  }
+  .textinput {
+    width: 75%;
+    height: 1 00%;
+  }
+  
+  input {
+  border: 2px solid;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin: 0.25rem;
+  min-width: 125px;
+  padding: 0.5rem;
+  transition: border-color 0.5s ease-out;
+}
+input:optional {
+  border-color: gray;
+}
+input:required:valid {
+  border-color: green;
+}
+input:invalid {
+  border-color: red;
+}
+input:required:focus:valid {
+  background: url("https://assets.digitalocean.com/labs/icons/hand-thumbs-up.svg") no-repeat 95% 50% lightgreen;
+  background-size: 25px;
+}
+input:focus:invalid {
+  background: url("https://assets.digitalocean.com/labs/icons/exclamation-triangle-fill.svg") no-repeat 95% 50% lightsalmon;
+  background-size: 25px;
+}
 /***********
 ** HEADER **
 ************/
@@ -94,6 +130,11 @@ nav {
 
 .navbar {
     padding: 0 1rem;
+}
+
+.nav-item.active a {
+    font-weight: 800;
+    color: #ffd800;
 }
 
 .nav-link {
@@ -219,6 +260,12 @@ nav {
     color: #8c8c8c;
     font-weight: 600;
     padding: 60px 0;
+}
+
+@media (min-width: 992px) {
+    main {
+        min-height: 100px;
+    }
 }
 
 .main h1 {
@@ -369,11 +416,6 @@ nav {
 /***********
 ** FOOTER **
 ************/
-main::after {
-    content: '';
-    display: block;
-    height: 50px; /* Set same as footer's height */
-  }
 
 footer {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("logo_footer.bbee6106607e.png") center 100px no-repeat rgba(0, 0, 0, 0.6);
@@ -385,9 +427,6 @@ footer {
     text-align: center;
     font-size: 0.75rem;
     border-top: 1px solid #272727;
-    bottom: 0;
-    position: absolute;
-    
 }
 
 footer p {
@@ -420,6 +459,10 @@ footer p {
     padding: 2.5rem 0;
     background: #0d0c0c;
     margin-top: 4rem;
+}
+
+#copyright.h4 {
+    margin-bottom: 0 !important
 }
 
 footer hr {

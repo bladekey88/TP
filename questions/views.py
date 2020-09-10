@@ -120,7 +120,7 @@ def addtopic(request):
         else:
             messages.error(request, '<b>Error:</b> The value entered "{}" is invalid. This may be due to an character or a processing error.<br>Please try again. If you encounter further errors please contact a staff member.'.format(topic_name))
 
-        
+        return redirect('questions:addtopic')
     
     else:
         form = AddTopicForm()
