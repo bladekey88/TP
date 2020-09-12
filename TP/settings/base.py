@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 from django.contrib.messages import constants as messages
-
+from rest_framework.settings import api_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+from datetime import timedelta
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['localhost','www.teachingperiodically.com','3.11.69.77']
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'home',
     'flex',
     'streams',
@@ -82,6 +83,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',    
     'allauth.socialaccount.providers.google',
+    'knox',
+    'django_filters',
     'django_cleanup.apps.CleanupConfig',
     
 ]
@@ -255,7 +258,7 @@ ACCOUNT_USERNAME_BLACKLIST = ["admin","arun","jake","liv","olivia","squeeze","sy
 SOCIALACCOUNT_AUTO_SIGNUP = False
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/accounts/login/" 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SOCIALACCOUNT_PROVIDERS = {
      'google': {
@@ -282,3 +285,32 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '60/minute',
+        'user': '1000/day'
+    },
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+        
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
+REST_KNOX = {
+  'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
+  'AUTH_TOKEN_CHARACTER_LENGTH': 64,
+  'TOKEN_TTL': timedelta(days=7),
+  'USER_SERIALIZER': 'knox.serializers.UserSerializer',
+  'TOKEN_LIMIT_PER_USER': 10,
+  'AUTO_REFRESH': True,
+  'EXPIRY_DATETIME_FORMAT': 'iso-8601',
+  'MIN_REFRESH_INTERVAL': 60,
+}

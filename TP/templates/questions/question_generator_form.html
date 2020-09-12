@@ -12,6 +12,34 @@
 
 {% block extra_css %}
 <style>
+    .form-controls-active {
+        background-color: #f1f1f1;
+        border: 1px solid black;
+    }
+
+    select {
+        display: block;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #444;
+        line-height: 1.3;
+        padding: .6em 1.4em .5em .8em;
+        width: 100%;
+        max-width: 100%;
+        /* useful when width is set to anything other than 100% */
+        box-sizing: border-box;
+        margin: 0;
+        border: 1px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+        border-radius: .5em;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        margin: 0.5rem 0 1rem 0;
+    }
+
     input[type="radio"] {
         opacity: 0;
     }
@@ -47,12 +75,12 @@
         background: white;
         color: rgb(28, 131, 28);
         padding: 4px;
-        margin-left: 35%;
-
+        display: block;
+        margin: 0
     }
 
     .custom-radio input[type="radio"]:focus+label {
-        border: 3px dashed red;
+        border: 3px solid rgb(221, 207, 16);
     }
 
     .custom-radio label:hover {
@@ -64,92 +92,140 @@
     hr {
         border-top: 1px solid;
     }
+
+    .card-outer {
+        margin: 50px 0;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<div id='javascriptwarning' class="text-center alert text-uppercase alert-danger" role="alert">
-    </button>
-    <strong><b>WARNING - </b>Javascript must be enabled to proceed</strong>
+<div class="breadcrumbs">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">
+                    <i class="fas fa-home"></i>
+                </a></li>>
+            <li><a href="/question-generator">Question Generator</a></li>>
+            <li class="active">Generate Questions</li>
+        </ul>
+    </div>
 </div>
 
-<div id="mainContent" style="display: none;">
+<div id='javascriptwarning' class="text-center alert  alert-danger" role="alert">
+    <h5 class="text-uppercase font-weight-bolder align-middle">
+        <i class="fas fa-exclamation-triangle"> </i>
+        &nbsp;Javascript must be enabled to proceed
+    </h5>
+    <p class="p-2">The question generator requires javascript to be enabled to proceed.</p>
+    <p>If javascript is enabled and you are
+        still seeing this message, please ensure you are not blocking scripts from running on this page. </p>
+    <a href="{% url 'questions:home'%}"> Go Back </a>
+</div>
 
-    <form method="post" id="questionForm"   data-topics-url="{% url 'questions:ajax_load_topics' %}" >
-        {% csrf_token %}
+<!-- PAGE HEADER-->
+<div class="main-header pt-5 text-uppercase">
+    <h2 class="text-center font-weight-bolder">
+        Generate Questions
+    </h2>
+</div>
 
-        <!-- {% crispy form %} -->
+<div class="container">
+    <div id="mainContent" style="display: none;">
 
-        <div class="card card-border">
-            <div class="card-body">
-                {{form.subjectid |as_crispy_field}}
-                {{form.topicid |as_crispy_field}}
+        <form method="post" id="questionForm" data-topics-url="{% url 'questions:ajax_load_topics' %}">
+            {% csrf_token %}
+
+            <!-- {% crispy form %} -->
+
+            <div class="card card-outer card-border">
+                <div class="card-header bg-dark text-white border-primary d-flex justify-content-between ">
+                    <h5>Select a Subject and Any Associated Topics</h5>
+                    <h5>Step 1</h5>
+                </div>
+                <div class="card-body text-center">
+                    {{form.subjectid |as_crispy_field}}
+                    {{form.topicid |as_crispy_field}}
+                </div>
             </div>
-        </div>
 
-        <div id="optionGroup" class="card shadow bg-white mb-3 border-dark">
-            <div class="card-header border-dark">
-                <h6 class="text-dark font-weight-bold text-left">Select an Option For Question Generation</h6>
-            </div>
-            <div class="card-body">
+            <div id="optionGroup" class="card shadow bg-white mb-3 border-dark">
+                <div class="card-header bg-dark text-white border-primary d-flex justify-content-between">
+                    <h5>Select an Option For Question Generation</h5>
+                    <h5>Step 2</h5>
+                </div>
+                <div class="card-body">
 
-                <div class="form-group flex-fill">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4" id="radioColumn">
-                                <div class="custom-control custom-radio">
-                                    <input required type="radio" id="customRadio1" name="customRadio"
-                                        class="form-check-input" value="oneFromEach">
-                                    <label class="form-check-label" for="customRadio1">
-                                        <h5 class="text-center">1 Question From Each Selected Topic</h5>
-                                        <hr>
-                                        <p class="text-center font-weight-lighter">Selecting this option will return one
-                                            randomly selected question from each topic chosen. If a topic only has one
-                                            question associated to it, then that question will always be returned.</p>
-                                    </label>
+                    <div class="form-group flex-fill">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4" id="radioColumn">
+                                    <div class="custom-control custom-radio">
+                                        <input required type="radio" id="customRadio1" name="customRadio"
+                                            class="form-check-input" value="oneFromEach">
+                                        <label class="form-check-label" for="customRadio1">
+                                            <h5 class="text-center">1 Question From Each Selected Topic</h5>
+                                            <hr>
+                                            <p class="text-center font-weight-lighter">Selecting this option will return
+                                                one
+                                                randomly selected question from each topic chosen. If a topic only has
+                                                one
+                                                question associated to it, then that question will always be returned.
+                                            </p>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4" id="radioColumn">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio2" name="customRadio" class="form-check-input"
-                                        value="tenFromEach " disabled>
-                                    <label class="form-check-label" for="customRadio2">
-                                        <h5 class="text-center">10 Questions From A Selected Topic (DISABLE COMING SOON)</h5>
-                                        <hr>
-                                        <p class="text-center font-weight-lighter">Selecting this option will return ten
-                                            randomly selected questions. You can quickly change topics on the results
-                                            page.<strong>You do <b>not</b> need to select a topic to
-                                                continue.</strong></strong></p>
-                                    </label>
+                                <div class="col-md-4" id="radioColumn">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio2" name="customRadio"
+                                            class="form-check-input" value="tenFromEach" >
+                                        <label class="form-check-label" for="customRadio2">
+                                            <h5 class="text-center">10 Questions From A Selected Topic</h5>
+                                            <hr>
+                                            <p class="text-center font-weight-lighter">Selecting this option will return
+                                                ten
+                                                randomly selected questions. You can quickly change topics on the
+                                                results
+                                                page.<strong>You do <b>not</b> need to select a topic to
+                                                    continue.</strong></strong></p>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4" id="radioColumn">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="customRadio3" name="customRadio" class="form-check-input"
-                                        value="fromMany">
-                                    <label class="form-check-label" for="customRadio3">
-                                        <h5 class="text-center"><em>x</em> Questions From Any Selected Topic</h5>
-                                        <hr>
-                                        <p class="text-center font-weight-lighter">Selecting this option will return a
-                                            variable amount of randomly selected questions from any of the topics
-                                            chosen. The maximum number of questions that can be returned is 10.</p>
-                                    </label>
+                                <div class="col-md-4" id="radioColumn">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio3" name="customRadio"
+                                            class="form-check-input" value="fromMany">
+                                        <label class="form-check-label" for="customRadio3">
+                                            <h5 class="text-center"><em>x</em> Questions From Any Selected Topic</h5>
+                                            <hr>
+                                            <p class="text-center font-weight-lighter">Selecting this option will return
+                                                a
+                                                variable amount of randomly selected questions from any of the topics
+                                                chosen. The maximum number of questions that can be returned is 10.</p>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {{form.number_of_questions|as_crispy_field}}
+
                 </div>
-                {{form.number_of_questions|as_crispy_field}}
+            </div>
+            <div id="submitWarning" class="text-center font-weight-bold"></div>
+            <div class="form-controls text-center py-2 my-2">
+                <button type="submit" id='submit' name='submit'
+                    class='font-weight-bold border-dark p-3 m-1 btn btn-primary' hidden disabled>Generate
+                    Questions</button>
+                <button type="reset" id='reset' name='reset' class='font-weight-bold border-dark p-3 m-1 btn btn-danger'
+                    hidden disabled>Reset Generator</button>
 
             </div>
-        </div>
-        <div id="submitWarning" class="text-center font-weight-bold"></div>
-        <button type="submit" id='submit' name='submit' class='btn btn-block btn-primary' hidden disabled>Generate
-            Questions</button>
 
-    </form>
+        </form>
+    </div>
 </div>
-
 {% endblock %}
 
 
@@ -167,9 +243,13 @@
             success: function (data) {
                 $("#div_id_topicid").html(data);
                 console.log(data.length)
-                if (data.length > 3500) {      //CHANGE 3240 is the new length of data with the graph.
+                if (data.length > 4000) {      //CHANGE 3240 is the new length of data with the graph.
+                    $('.form-controls').show();
+                    $('.form-controls').addClass('form-controls-active')
                     $("#submit").prop('disabled', false);
                     $("#submit").prop('hidden', false);
+                    $("#reset").prop('disabled', false);
+                    $("#reset").prop('hidden', false);
                     $('label[for=""]').show();
                     $("#div_id_choice_field").show()
                     $('#optionGroup').show();
@@ -178,9 +258,11 @@
 
 
                 } else {
-
+                    $('.form-controls').hide();
                     $("#submit").prop('disabled', true);
                     $("#submit").prop('hidden', true);
+                    $("#reset").prop('disabled', true);
+                    $("#reset").prop('hidden', true);
                     $('label[for=""]').hide();
                     $("#div_id_number_of_questions").hide();
                     $('#optionGroup').hide();
@@ -244,17 +326,20 @@
         if ($('#customRadio1').is(':checked') && $('div.checkbox-group.required :checkbox:checked').length == 0) {
             event.preventDefault();
             $('#submitWarning').addClass("alert border-danger alert-danger");
-            $('#submitWarning').html("<b>You have selected '1 Question From Each Selected Topic', but have not selected any topics. Please correct this and try again, or choose another option. </b>")
+            $('#submitWarning').html("<b>You have selected '1 Question From Each Selected Topic', but have not selected any topics.<br>Please correct this and try again, or choose another option. </b>")
         }
 
 
         if ($('#customRadio3').is(':checked') && $('div.checkbox-group.required :checkbox:checked').length == 0) {
             event.preventDefault();
             $('#submitWarning').addClass("alert border-danger alert-danger");
-            $('#submitWarning').html("<b>You have selected 'x Questions From Any Selected Topic', but have not selected any topics. Please correct this and try again, or choose another option. </b>")
+            $('#submitWarning').html("<b>You have selected 'x Questions From Any Selected Topic', but have not selected any topics.<br> Please correct this and try again, or choose another option. </b>")
         }
+    })
 
-
+    $('#reset').click(function () {
+        $('#submitWarning').removeClass("alert border-danger alert-danger");
+        $('#submitWarning').html("")
     })
 
 </script>

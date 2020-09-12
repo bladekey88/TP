@@ -10,7 +10,7 @@ from django.urls import include
 app_name = 'questions'
 
 urlpatterns = [
-    path('', views.index, name='subject'),
+    path('', views.index, name='home'),
     path('subject/', views.subject, name='subject'),    
     path('subject/add/',views.addsubject,name="addsubject"),
     path('subject/<str:subjectname>', views.editSubject, name='editsubject'),
@@ -29,7 +29,7 @@ urlpatterns = [
     path('file-upload/', views.fileupload, name='fileupload'),
     path('file-upload/success/', views.fileupload_success, name='fileuploadsuccess'),
     
-    path('generate/', views.makeQuestion, name='subject_add'),
+    path('generate-questions/', views.makeQuestion, name='subject_add'),
     path('ajax/load-topics/', views.load_topics, name='ajax_load_topics'),
-    path('createquestions/', views.createQuestions, name='createquestions'),
+    path('generate-questions/results/', views.createQuestions, name='createquestions'),
 ]

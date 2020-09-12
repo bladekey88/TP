@@ -1,9 +1,6 @@
 {% load static %}
 
 
-
-
-
 <div class="alert alert-primary" role="alert">
     <h6 class="text-center text-dark font-weight-bolder">
         <i class="fa fa-info-circle fas"></i>
@@ -19,7 +16,7 @@
 {% if question_count > 0 %}
 <div class="card border-dark shadow">
     <a href="#cardGraph" class="card-header border-secondary font-weight-bold text-dark" data-toggle="collapse"
-        role="button" aria-expanded="true" aria-controls="cardGraph"> Number of Question in Each Topic For Subject</a>
+        role="button" aria-expanded="true" aria-controls="cardGraph"> Number of Question in Each Topic</a>
 
     <div class="collapse show" id="cardGraph">
         <div class="card-body">
@@ -27,9 +24,10 @@
                 <button id='buttonBar' type='button' class='btn btn-success '>Bar Chart</button>
                 <button id='buttonPie' type='button' class='btn btn-success '>Pie Chart</button>
                 <button id='buttonDoughnut' type='button' class='btn btn-success'>Doughnut Chart</button>
-
             </h5>
-            <p class="card-text"><canvas id="myChart" aria-label="Test Graph" role="figure"></canvas></p>
+            <p class="card-text">
+                <canvas id="myChart" aria-label="Test Graph" role="figure"></canvas>
+            </p>
         </div>
     </div>
 </div>
@@ -84,7 +82,7 @@
     for (var i = 0; i < graphSize; i++) {
         bgColor.push(getRandomColor());
     }
-    console.log([bgColor]);
+    // console.log([bgColor]);
 
     var chartData = {
 
@@ -97,7 +95,7 @@
             backgroundColor: bgColor,
         }]
     };
-    console.log(chartData);
+    // console.log(chartData);
 
     var config = {
         type: 'bar',
@@ -107,16 +105,16 @@
                 display: false,
             },
             scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: true,
-                // stepSize:1 
-            }
-        }]
-    },
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            },
             title:
             {
-                text: 'Number of Questions per Topic ',
+                text: 'Questions per Topic ',
                 display: true,
                 legend: { display: false, }
             },
@@ -137,7 +135,7 @@
 
         myChart.destroy();
         myChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'polarArea',
             data: chartData,
             options: {
                 legend: {

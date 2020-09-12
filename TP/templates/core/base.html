@@ -47,7 +47,7 @@
         <div class="col-7 col-sm-8">
           <div class="float-right">
             {% if request.user.is_anonymous %}
-            <a href="#" class="btn btn-dark">Register</a>
+            <a href="/accounts/signup" class="btn btn-dark">Register</a>
             <a href="/accounts/login" class="btn btn-sm btn-danger ">Log In</a>
             {% else %}
             <a href="/accounts/logout" class="btn btn-sm btn-dark">Logout</a>
@@ -126,7 +126,7 @@
         </p>
       </div>
 
-      <div class="CTAs"><a href="#" class="btn btn-primary">Sign Up</a><a href="#" class="btn btn-outline-light">Learn
+      <div class="CTAs"><a href="/accounts/signup" class="btn btn-primary">Sign Up</a><a href="#" class="btn btn-outline-light">Learn
           more</a></div>
     </div>
     <hr>

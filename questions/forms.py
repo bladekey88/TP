@@ -1,5 +1,5 @@
 from django import forms
-from .models import Document, Subject, Topic, Question
+from .models import Document, ProcessDocument, Question, Subject, Topic,
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -57,3 +57,12 @@ class QuestionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['topicid'].queryset = Question.objects.none()
         self.fields['topicid'].empty_label=None                
+        
+        
+class ProcessDocumentForm(forms.ModelForm):
+
+  class Meta:
+        model = ProcessDocument
+        fields = ('processed_id',)
+
+        

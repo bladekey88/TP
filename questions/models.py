@@ -78,3 +78,19 @@ class Document(models.Model):
         
     get_file_name.short_description = 'File Name'
     get_file_path.short_description = 'File Path'    
+    
+    
+
+class ProcessDocument(models.Model):
+    processed_id = models.AutoField(db_column='processedID', primary_key = True,)
+    processed_at = models.DateTimeField('Date Processed', auto_now_add=True)
+    processed_by = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null = True)
+    document_id = models.OneToOneField(Document, on_delete=models.CASCADE, unique=True, blank=True, null = True, verbose_name = "File")
+    
+    class Meta:
+        verbose_name = 'Processed File'
+        verbose_name_plural = 'Processed Files'
+
+    def __str__(self):
+        return str(self.processed_id)
+    

@@ -13,8 +13,8 @@
         transition: 0.1s;
     }
 
-   
-/* 
+
+    /* 
     #tableQuestion_wrapper{
         background: white;
     } */
@@ -27,87 +27,99 @@
 <div class="breadcrumbs">
     <div class="container">
         <ul class="breadcrumb">
-          <li>
-            <a href="/">
-            <i class="fas fa-home"></i>
-          </a></li>>
-          <li><a href="/question-generator">Question Generator</a></li>>
+            <li>
+                <a href="/">
+                    <i class="fas fa-home"></i>
+                </a></li>>
+            <li><a href="/question-generator">Question Generator</a></li>>
             <li><a href="/question-generator/topic">Topics</a></li>>
             <li class="active">{{topic}} </li>
         </ul>
     </div>
-  </div>
+</div>
 
-  <div class="container">
+<div class="container">
 
     <!-- PAGE HEADER-->
     <div class="main-header pt-5 text-uppercase">
         <h2 class="text-center font-weight-bolder">
-            Topic Details- {{topic}}
+            Topic Details
         </h2>
     </div>
 
-<div class="card  mb-4">
-    {% if perms.questions.add_topic %}
-    <div class="card-header py-3">
-            <h5 class="font-weight-bold text-primary">Topic Details
-                <a class="float-right" href="{% url 'questions:edittopic' topicid=topic.topicid %}"><button class="btn btn-sm btn-primary">Edit Topic </button></a>
-            </h5>
-          </div>
-          {% endif %}
-          <div class="card-body text-dark">
-            <div class="row">
-                <div class="col-4 mt-2 mb-2"><p class='lead'>Topic ID:</p></div>
-                <div class="col-sm-8 mt-2 mb-2"> <p class="text-justify  font-weight-bold">{{topic.topicid}}</p></div>
-          </div>
-          <div class="row">
-            <div class="col-4 mt-2 mb-2"><p class='lead'>Topic Name:</p></div>
-            <div class="col-8  mt-2 mb-2"> <p class="text-justify  font-weight-bold">{{topic.topicname}}</p></div>
-         </div>
-         <div class="row">
-            <div class="col-4 mt-2 mb-2"><p class='lead'>Linked to Subjects:</p></div>
-            <div class="col-8  mt-2 mb-2"> 
+    <div class="card card-bordered text-center  mb-4">
+        {% if perms.questions.edit_topic %}
+        <div class="card-header py-3">         
+                <a class="float-right" href="{% url 'questions:edittopic' topicid=topic.topicid %}"><button
+                        class="btn btn-sm btn-primary">Edit Topic </button></a>            
+        </div>
+        {% endif %}
+
+        <div class="card-body text-dark text-center shadow">
+            <div class="py-2">
+                <label>Topic Name</label>
+                <h5>{{topic.topicname}}</h5>
+            </div>
+
+            {% if perms.questions.edit_topic %}
+            <div class="py-2">
+                <label>Topic ID</label>
+                <h5>{{topic.topicid}}</h5>
+            </div>
+            {% endif %}
+
+            <div class="py-2">
+                <label>Associated With Subject(s)</label>
                 {% for s in subject %}
-                    {% if question|length > 0 %}                    
-                    <p><a href="{% url 'questions:editsubject' s.1 %}">{{s.1|capfirst}}</a></p>
-                    {% endif %}
+                {% if question|length > 0 %}
+                <h5><a href="{% url 'questions:editsubject' s.1 %}">{{s.1|capfirst}}</a></h5>
+                {% endif %}
                 {%endfor %}
             </div>
-        </div>  
-    </div>       
-</div>
 
 
-{% if perms.questions.view_questions and question|length > 0 %}
 
-<div class="card card-outer">
-    <div class="card-body">
-        <h5 class="font-weight-bolder text-center">There are {{question|length}} questions</h5>
-        <span class="text-center d-block text-secondary ">Click the column heading to sort</span>
-        <div class="card-inner">
-            .<table id="tableQuestion" class="table  table-hover">
-                <thead class="thead bg-white text-danger text-center">
-                    <tr>
-                        <th>Subject</th>
-                        <th>Question</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-light text-center">
-                    {% for q in question %}
-                    <tr>
-                        <td>{{q.subject}}</td>
-                        <td>{{q.questiontext}}</td>
-
-                    </tr>
-                    {% endfor %}
-                </tbody>                
-            </table>
         </div>
     </div>
-</div>
-    
-{% endif %}
-<!-- END -->    
+
+
+    {% if perms.questions.view_questions and question|length > 0 %}
+
+    <div class="card card-outer">
+        <div class="card-body">
+            <h5 class="font-weight-bolder text-center">
+                Topic is associated to
+                {% if question|length == 1 %}
+                {{question|length}} question
+                {% else %}
+                {{question|length}} questions
+                {% endif %}
+            </h5>
+            <span class="text-center d-block text-secondary ">Click the column heading to sort</span>
+            <div class="card-inner">
+                .<table id="tableQuestion" class="table  table-hover">
+                    <thead class="thead bg-white text-danger text-center">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Question</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-light text-center">
+                        {% for q in question %}
+                        <tr>
+                            <td>{{q.subject}}</td>
+                            <td>{{q.questiontext}}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+    <!-- END -->
 
 </div>
 {% endblock content %}
@@ -117,7 +129,7 @@
 <script src='{% static "/vendor/datatables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js" %}'></script>
 
 <script>
-  
+
 
     function loadDatatable() {
         $('#tableQuestion').DataTable({
@@ -141,7 +153,7 @@
     }
 
     $(document).ready(function () {
-       loadDatatable();
+        loadDatatable();
     })
 
 
