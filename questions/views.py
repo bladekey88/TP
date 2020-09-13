@@ -282,14 +282,14 @@ def fileupload_process(request, document_id):
     file_details = documentExists(document_id)
     subject = document.subject
     str_document_name = str(document)
-    document_name = str_document_name[str_document_name.rfind("/")+1:]
+    document_name = str_document_name[str_document_name.rfind("/")+1:] 
       
     if file_details['exists'] == False:
         return render(request,'questions/fileupload_process_document.html',{'document':document})
         #return HttpResponse("<h3>Unable to Process</h3>" + (document.get_file_name()) + "<br> The file is not available - it may have been moved or deleted.<br>")
     else:
         response = HttpResponse()
-  
+    
         ####################################################
         ############## Validation Check ####################
         ############## If this fails, then set the document 
@@ -439,7 +439,7 @@ def fileupload_process(request, document_id):
 def documentExists(document_id):
     document = Document.objects.get(pk=document_id)
     full_path = (settings.MEDIA_ROOT + document.get_file_path() + document.get_file_name())
-    document_exists = os.path.exists(full_path)
+    document_exists = os.path.exists(full_path)    
     return {'exists': document_exists,'path': full_path}
 
 def getTopicID(topic_name):

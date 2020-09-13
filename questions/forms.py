@@ -39,7 +39,7 @@ class QuestionForm(forms.ModelForm):
      
     
     CHOICES = [('1','1 Question From Each Selected Topic'),('2', 'Questions from Any Selected Topic')]    
-    number_of_questions = forms.IntegerField(min_value=1, max_value=10, required=True, label = "How many questions should be generated from all selected topics (max 10): ")
+    number_of_questions = forms.IntegerField(min_value=1, max_value=50, required=True, label = "How many questions should be generated from all selected topics (max 50): ")
 
     class Meta:    
         model = Question  

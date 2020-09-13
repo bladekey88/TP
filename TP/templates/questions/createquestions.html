@@ -234,8 +234,8 @@
         <script src='{% static "/vendor/datatables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js" %}'></script>
         {% endif %}
 
-        <script src='{% static "/vendor/jspdf/jspdf.min.js" %}'></script>
-        <script src='{% static "/vendor/jspdf/jspdf.plugin.autotable.js" %}'></script>
+        <script src='{% static "/vendor/jspdf/jspdf.min.js" %}'></script> 
+        <script src='{% static "/vendor/jspdf/jspdf.plugin.autotable.js" %}'></script>        
         <script src='{% static "/vendor/jspdf/KawashiroGothic-Lla5-normal.js" %}'></script>
 
 
@@ -465,7 +465,6 @@
             //Function to handle PDF creation
             function createPDF(tableID = null) {
 
-
                 var doc = new jsPDF("l");
                 var totalPagesExp = '{total_pages_count_string}';
                 doc.text('{{subject_name}} Worksheet', 124, 16)
@@ -479,10 +478,10 @@
                     pageBreak: 'avoid',
                     theme: 'grid',
                     tableWidth: 'auto',
-                    styles: {
-                        font: 'KawashiroGothic-Lla5',
-                        fontSize: 14,
-                    },
+                    // styles: {
+                    //     font: 'KawashiroGothic-Lla5',
+                    //     fontSize: 14,
+                    // },
                     columnStyles: {
                         0: { cellWidth: 20, fontSize: 10 },
                         1: { cellWidth: 150 },
