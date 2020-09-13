@@ -1,5 +1,5 @@
 from django import forms
-from .models import Document, ProcessDocument, Question, Subject, Topic,
+from .models import Document, ProcessDocument, Question, Subject, Topic
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 

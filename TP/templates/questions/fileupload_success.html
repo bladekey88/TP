@@ -20,7 +20,7 @@
     <div class="alert alert-success show" role="alert">
         <strong>File Uploaded Succesfully</strong> - File uploaded at: <a href="/{{ full_url }}">{{ full_url }}</a>
         <hr>
-        <p><a href="#">Click here to process the file</a>
+        <p><a href="{% url 'questions:fileuploadprocesslist' %}">Click here to process the file</a>
         <b> or </b><a href="{% url 'questions:fileupload' %}">Upload Another File</a></p>
         
     </div>

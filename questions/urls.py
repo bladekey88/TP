@@ -28,7 +28,11 @@ urlpatterns = [
         
     path('file-upload/', views.fileupload, name='fileupload'),
     path('file-upload/success/', views.fileupload_success, name='fileuploadsuccess'),
-    
+    path('file-upload/<int:fileid>/delete/', views.fileDelete, name='file_delete'),
+    path('file-upload/process/', views.file_processlist, name='fileuploadprocesslist'),
+    path('file-upload/process/<int:document_id>/', views.fileupload_process, name='fileuploadprocess'),
+     
+     
     path('generate-questions/', views.makeQuestion, name='subject_add'),
     path('ajax/load-topics/', views.load_topics, name='ajax_load_topics'),
     path('generate-questions/results/', views.createQuestions, name='createquestions'),
