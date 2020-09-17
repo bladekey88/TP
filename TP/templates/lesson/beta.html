@@ -1,5 +1,5 @@
 {% extends 'core/lesson.html' %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags comments %}
 
 {% block extra_css %}
 <style>
@@ -105,7 +105,11 @@
     <h4 class="lesson-section font-weight-bolder mb-2"> Presentation</h4>
     <iframe src="https://wordwall.net/embed/75098ca40f584aa7a1b2eaf7bc3d31be?themeId=1&templateId=3" width="500" height="380" frameborder="0" allowfullscreen></iframe>
 </section>
-{%endblock content %}
+
+
+
+
+{% endblock content %}
 
 
 {% block extra_js %}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('question-generator/', include('questions.urls')),
     path('question-generator/api/', include('api.urls')),
     path('accounts/', include('allauth.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^django-admin/', admin.site.urls),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

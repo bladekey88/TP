@@ -86,7 +86,7 @@ INSTALLED_APPS = [
     'knox',
     'django_filters',
     'django_cleanup.apps.CleanupConfig',
-    
+    'django_comments',
 ]
 
 SITE_ID = 1
