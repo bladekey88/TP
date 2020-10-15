@@ -257,6 +257,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = False
 ACCOUNT_USERNAME_BLACKLIST = ["admin","arun","jake","liv","olivia","squeeze","system"]
 SOCIALACCOUNT_AUTO_SIGNUP = False
 LOGIN_REDIRECT_URL = "/"
+WAGTAIL_FRONTEND_LOGIN_TEMPLATE = 'account/login.html'
 LOGIN_URL = "/accounts/login/" 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
